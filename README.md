@@ -33,7 +33,11 @@ Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t
 - không được khởi tạo, giá trị biến tại file extern chỉ được gọi, chỉ được ở file (test)
 
 - vì runcode chỉ build được một file duy nhất nên ta dùng:
-    gcc 4_3_extern.c 4_2_test.c -o 4_3_extern (gcc file1.c file2.c -o file1) file1 là file dùng extern.
+
+    (gcc file1.c file2.c -o file1) file1 là file dùng extern.
+
+    gcc 4_3_extern.c 4_2_test.c -o 4_3_extern 
+
     ./4_3_extern (./file1)
 
 /Register
