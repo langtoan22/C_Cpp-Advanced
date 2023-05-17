@@ -41,6 +41,7 @@ Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t
 - ALU(bộ xử lý tính toán), Register(thanh ghi), RAM  (cấu trúc vi xử lý gồm RAM và Register)
     vidu: int a = 5;
           a++;
+          
           RAM(a=5) -> Register(a=5 và phép toán) -> ALU(thực hiện a++ =6)
                                                     
           RAM(nhận kết quả từ Register) <- Register(nhận kết quả từ ALU) <-
