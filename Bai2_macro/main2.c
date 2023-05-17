@@ -12,7 +12,7 @@ int a = 10;
 #endif
 
 //nguoc lai cua ifndef
-//chua duoc dinh nghia nen se xuat hien tron main2.i
+//chua duoc dinh nghia nen se xuat hien trong main2.i
 #ifdef Max
 int a = 25;
 #endif

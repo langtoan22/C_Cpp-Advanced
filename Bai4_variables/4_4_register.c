@@ -6,9 +6,9 @@
 
 int main()
 {
-   clock_t start, end;
+   clock_t start, end; //clock_t: typedef unsign long
 
-   uint32_t i;
+   register uint32_t i;
 
    start = clock();  //1s
 

@@ -5,7 +5,7 @@
 // this is function
 
 void test (){
-printf("this is test\n");
+    printf("this is test\n");
 }
 
 int main(int argc, char* argr[])
