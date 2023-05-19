@@ -67,46 +67,47 @@ Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t
 
     + Text(5.1_const):  
 
-    chỉ có quyền Read và không có quyền sửa
+    Chỉ có quyền Read và không có quyền sửa
     
-    hằng số sẽ được lưu ở phân vùng text
+    Hằng số sẽ được lưu ở phân vùng text
 
     + Data(5.2_Data):   
 
-    có quyền Read và write(đọc và sửa)
+    Có quyền Read và write(đọc và sửa)
 
-    chứa biến toàn cục hoặc biến static được khởi tạo với giá trị khác
+    Chứa biến toàn cục hoặc biến static được khởi tạo với giá trị khác
 
-    được giải phóng khi kết thúc chương trình 
+    Được giải phóng khi kết thúc chương trình 
 
-        chú ý: căn cứ giá trị gán ở lần đầu tiên để phân vùng
+        Chú ý: căn cứ giá trị gán ở lần đầu tiên để phân vùng
             vidu: static uint8_t test = 21; sau có thay đổi giá trị 21 = 0 thì vẫn được lưu ở Data
 
     + bss: 
-    có quyền Read và write(đọc và sửa)
 
-    chứa biến toàn cục hoặc biến static được khởi tạo với giá trị = 0 hoặc không khởi tạo(ngược lại với Data)
+    Có quyền Read và write(đọc và sửa)
 
-    được giải phóng khi kết thúc chương trình 
+    Chứa biến toàn cục hoặc biến static được khởi tạo với giá trị = 0 hoặc không khởi tạo(ngược lại với Data)
+
+    Được giải phóng khi kết thúc chương trình 
 
 
-    chú ý: căn cứ giá trị gán ở lần đầu tiên để phân vùng
-        vidu: static uint8_t test = 0; sau có thay đổi giá trị 0 = 21 thì vẫn được lưu ở bss
+        Chú ý: căn cứ giá trị gán ở lần đầu tiên để phân vùng
+            vidu: static uint8_t test = 0; sau có thay đổi giá trị 0 = 21 thì vẫn được lưu ở bss
 
     + Stack(5.3_Stack):     
 
-    có quyền Read và write(đọc và sửa); 
+    Có quyền Read và write(đọc và sửa); 
 
-    được sử dụng cấp phát cho biến local(cục bộ), input parameter...
+    Được sử dụng cấp phát cho biến local(cục bộ), input parameter...
 
-    sẽ được giải phóng khi ra khỏi block code/hàm
+    Sẽ được giải phóng khi ra khỏi block code/hàm
 
     + Heap(5.5_Heap):       
 
-    có quyền Read và write(đọc và sửa); 
+    Có quyền Read và write(đọc và sửa); 
 
-    được sử dụng để cấp phát bộ nhớ động như: Malloc, calloc...; 
+    Được sử dụng để cấp phát bộ nhớ động như: Malloc, calloc...; 
 
-    sẽ giải phóng khi gọi hàm free...; 
+    Sẽ giải phóng khi gọi hàm free...; 
 
-    phân vùng heap không có cơ chế thu hồi bộ nhớ mà phải dùng đến hàm free (5.7.c)
+    Phân vùng heap không có cơ chế thu hồi bộ nhớ mà phải dùng đến hàm free (5.7.c)
