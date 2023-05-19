@@ -65,28 +65,48 @@ Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t
 
 - Trong bộ nhớ RAM sẽ có 5 phân vùng nhớ: text, data, bss, heap, stack
 
-    + Text(5.1_const):  chỉ có quyền Read và không có quyền sửa
-                        hằng số sẽ được lưu ở phân vùng text
+    + Text(5.1_const):  
 
-    + Data(5.2_Data):   có quyền Read và write(đọc và sửa)
-                        chứa biến toàn cục hoặc biến static được khởi tạo với giá trị khác
-                        được giải phóng khi kết thúc chương trình 
+    chỉ có quyền Read và không có quyền sửa
+    
+    hằng số sẽ được lưu ở phân vùng text
+
+    + Data(5.2_Data):   
+
+    có quyền Read và write(đọc và sửa)
+
+    chứa biến toàn cục hoặc biến static được khởi tạo với giá trị khác
+
+    được giải phóng khi kết thúc chương trình 
 
         chú ý: căn cứ giá trị gán ở lần đầu tiên để phân vùng
             vidu: static uint8_t test = 21; sau có thay đổi giá trị 21 = 0 thì vẫn được lưu ở Data
 
-    + bss:  có quyền Read và write(đọc và sửa)
-            chứa biến toàn cục hoặc biến static được khởi tạo với giá trị = 0 hoặc không khởi tạo(ngược lại với Data)
-            được giải phóng khi kết thúc chương trình 
+    + bss: 
+    có quyền Read và write(đọc và sửa)
 
-        chú ý: căn cứ giá trị gán ở lần đầu tiên để phân vùng
-            vidu: static uint8_t test = 0; sau có thay đổi giá trị 0 = 21 thì vẫn được lưu ở bss
+    chứa biến toàn cục hoặc biến static được khởi tạo với giá trị = 0 hoặc không khởi tạo(ngược lại với Data)
 
-    + Stack(5.3_Stack):     có quyền Read và write(đọc và sửa)
-                            được sử dụng cấp phát cho biến local(cục bộ), input parameter...
-                            sẽ được giải phóng khi ra khỏi block code/hàm
+    được giải phóng khi kết thúc chương trình 
 
-    + Heap(5.5_Heap):       có quyền Read và write(đọc và sửa)
-                            được sử dụng để cấp phát bộ nhớ động như: Malloc, calloc...
-                            sẽ giải phóng khi gọi hàm free...
-                        phân vùng heap không có cơ chế thu hồi bộ nhớ mà phải dùng đến hàm free (5.7.c)
+
+    chú ý: căn cứ giá trị gán ở lần đầu tiên để phân vùng
+        vidu: static uint8_t test = 0; sau có thay đổi giá trị 0 = 21 thì vẫn được lưu ở bss
+
+    + Stack(5.3_Stack):     
+
+    có quyền Read và write(đọc và sửa); 
+
+    được sử dụng cấp phát cho biến local(cục bộ), input parameter...
+
+    sẽ được giải phóng khi ra khỏi block code/hàm
+
+    + Heap(5.5_Heap):       
+
+    có quyền Read và write(đọc và sửa); 
+
+    được sử dụng để cấp phát bộ nhớ động như: Malloc, calloc...; 
+
+    sẽ giải phóng khi gọi hàm free...; 
+
+    phân vùng heap không có cơ chế thu hồi bộ nhớ mà phải dùng đến hàm free (5.7.c)
