@@ -8,11 +8,11 @@
 - Quá trình tiền xử lý: 
 
 
-    .C/.H(source file)--preprocessor--> .I(preprocessed,source)
+.C/.H(source file)--preprocessor--> .I(preprocessed,source)
 
-    <<--assembler--  .S(assemply code)     <--compiler--
+<<--assembler--  .S(assemply code)     <--compiler--
 
-    .O(object file, libraries) --linker--> .exe(executable).
+.O(object file, libraries) --linker--> .exe(executable).
 
 
 - Preprocessor: gcc -E file1.c -o file1.i
@@ -77,10 +77,10 @@ vidu:
 
 #BAI3_INPUT
 
-- sử dụng thư viện include<stdarg>
+- sử dụng thư viện include_stdarg
 
-#include<stdio.h>
-#include<stdarg>
+#include_stdio.h
+#include_stdarg
 
 void ten (int SoLuong_input,...){
 
