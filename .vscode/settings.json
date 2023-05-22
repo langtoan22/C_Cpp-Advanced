@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "stdint.h": "c",
+        "4.5_.C": "cpp",
+        "4.5_voulatile.C": "cpp",
+        "4.5_volatile.C": "cpp"
+    }
+}

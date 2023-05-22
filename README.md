@@ -1,12 +1,112 @@
 # C_Cpp-Advanced
 
-#Bai1
+#BAI1
 
-#Bai2_macro
+- Ngôn ngữ bậc cao --Compiler--> Ngôn ngữ bậc thấp
+  (c/c++, java...)             (nhị phân, ngôn ngữ mtinh)
 
-#Bai3_input
+- Quá trình tiền xử lý: 
 
-#Bai4_Variable
+
+.C/.H(source file)--preprocessor--> .I(preprocessed,source)
+
+    <<--assembler--  .S(assemply code)     <--compiler--
+
+.O(object file, libraries) --linker--> .exe(executable)
+
+
+- Preprocessor: gcc -E file1.c -o file1.i
+
+- Compiler:     gcc file.i -S -o file1.s
+
+- Assembler:    gcc -c file1.s -o file1.o
+                gcc file1.c -o file1.o
+
+- Linker:       gcc file1.o -o file
+
+- Cấu trúc của một chương trình:
+
+    #include<stdio.h> (thư viện, có thể là một file khác với include"file1")
+
+    #define Max 10 (macro)
+
+    //this is function
+        void test(){
+            prinf("this is function");
+        }
+    int main(){
+        {
+            test();
+            return 0;
+        }
+    }
+
+
+
+
+#BAI2_MACRO
+
+#ifndef value 
+
+    value(leybel): được khởi tạo với một giá trị
+
+    ifdef(if not define): kiểm tra value được định nghĩa hay chưa
+
+#endif  (đóng)
+
+
+#ifdef value
+
+    ifdef: ngược lại ifndef, viết tiếp với value đã được định nghĩa
+
+#endif
+
+vidu:
+
+    #define value int_int##name;
+                  char_char##name;
+                  double_double##name;
+    int main(){
+        value(biến);
+    }
+
+=> thay vì tạo 3 biến trong macro ta có thể làm như trên.
+
+
+
+
+#BAI3_INPUT
+
+- sử dụng thư viện include<stdarg>
+
+#include<stdio.h>
+#include<stdarg>
+
+void ten (int SoLuong_input,...){
+        //(...): thể hiện các giá trị đằng sau
+
+        //va_list sometext (lưu trữ các biến đối số(...)được truyền vào hàm "ten")
+
+        //va_start (sometext, SoLuong_input): Dùng để bắt đầu truy cập vào danh sách các biến đối số và cập nhật con trỏ đến vị trí đầu tiên trong danh sách
+
+for(int i = 0; i < SoLuong_input; i++){
+    printf("hjksdf: %d\n", va_arg(va, int));
+
+        //va_arg: dùng để lấy giá trị từng biến và cập nhật vị trí con trỏ trong danh sách
+
+}
+
+}
+
+int main(){
+    ten(5(SoLuong_input), 2, 4, 3, 6, 1);
+    return 0;
+}
+
+
+
+
+#BAI4_VARIABLE
 
 Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t
 
@@ -56,7 +156,21 @@ Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t
 - Thông báo cho compiler không tối ưu hàm đã được khởi tạo sẵn( sử dụng giá trị đã được khởi tạo từ trước)
 
 
-#Bai5_PhanVungNho(trenRAM)
+
+
+#BAI5_PHANVUNGNHO(MCU)(trenRAM)
+
+vidu: int a; (.bss)
+      int b = 42; (.data)
+
+      void main(void)  (.text)
+      {
+        int c;
+        a=10;
+        cong(a,b);
+      }
+
+==> sections
 
 - Phân vùng nhớ gồm hai vùng nhớ là Flash và RAM:
 
@@ -65,49 +179,61 @@ Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t
 
 - Trong bộ nhớ RAM sẽ có 5 phân vùng nhớ: text, data, bss, heap, stack
 
-    + Text(5.1_const):  
+    + Text(text segment)(5.1_const):  
 
-    Chỉ có quyền Read và không có quyền sửa
-    
-    Hằng số sẽ được lưu ở phân vùng text
+        * Chỉ có quyền Read và không có quyền sửa;
+        * Chứa lệnh thực thi chương trình;
+        * Hằng số sẽ được lưu ở phân vùng text (.rodata);
 
-    + Data(5.2_Data):   
+     void main(void)  (.text)
+      {
+        int c;
+        a=10;
+        cong(a,b);
+      }
 
-    Có quyền Read và write(đọc và sửa)
 
-    Chứa biến toàn cục hoặc biến static được khởi tạo với giá trị khác
+    + Data (Initialized Data segment)(5.2_Data):   
 
-    Được giải phóng khi kết thúc chương trình 
+        * Có quyền Read và write(đọc và sửa);
+        * Chứa biến toàn cục hoặc biến static được khởi tạo
+        với giá trị khác 0 (global and static variables);
+        * Được giải phóng khi kết thúc chương trình ;
+
+        vidu: int global = 100;
+              static int = 100;
 
         Chú ý: căn cứ giá trị gán ở lần đầu tiên để phân vùng
+
             vidu: static uint8_t test = 21; sau có thay đổi giá trị 21 = 0 thì vẫn được lưu ở Data
 
-    + bss: 
+    + bss (uninitialized Data segment): 
 
-    Có quyền Read và write(đọc và sửa)
+        * Có quyền Read và write(đọc và sửa);
+        * Chứa biến toàn cục hoặc biến static được khởi ;tạo với giá trị = 0 hoặc không khởi tạo(ngược lại với Data);
+        * Được giải phóng khi kết thúc chương trình; 
 
-    Chứa biến toàn cục hoặc biến static được khởi tạo với giá trị = 0 hoặc không khởi tạo(ngược lại với Data)
-
-    Được giải phóng khi kết thúc chương trình 
+        vidu: int global;
+              static int = 0;
 
 
         Chú ý: căn cứ giá trị gán ở lần đầu tiên để phân vùng
             vidu: static uint8_t test = 0; sau có thay đổi giá trị 0 = 21 thì vẫn được lưu ở bss
 
-    + Stack(5.3_Stack):     
 
-    Có quyền Read và write(đọc và sửa); 
+    + Stack(Automatic Variable Storage_cấp phát bộ nhớ tự động)(5.3_Stack):     
 
-    Được sử dụng cấp phát cho biến local(cục bộ), input parameter...
+        * Có quyền Read và write(đọc và sửa); 
+        * Được sử dụng cấp phát cho biến local(cục bộ):
+            input parameter
+            Được khai báo bên trong một block code '{'và'}'
+        * Sẽ được giải phóng khi ra khỏi block code/hàm;
 
-    Sẽ được giải phóng khi ra khỏi block code/hàm
 
-    + Heap(5.5_Heap):       
+    + Heap(Dynamic Memory allocation_cấp phát bộ nhớ động):(5.5_Heap):       
 
-    Có quyền Read và write(đọc và sửa); 
+        * Có quyền Read và write(đọc và sửa); 
+        * Được sử dụng để cấp phát bộ nhớ động như: Malloc, calloc...; 
+        * Sẽ giải phóng khi gọi hàm free...; 
 
-    Được sử dụng để cấp phát bộ nhớ động như: Malloc, calloc...; 
-
-    Sẽ giải phóng khi gọi hàm free...; 
-
-    Phân vùng heap không có cơ chế thu hồi bộ nhớ mà phải dùng đến hàm free (5.7.c)
+        Phân vùng heap không có cơ chế thu hồi bộ nhớ mà phải dùng đến hàm free (5.7.c)
