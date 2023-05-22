@@ -8,11 +8,11 @@
 - Quá trình tiền xử lý: 
 
 
-.C/.H(source file)--preprocessor--> .I(preprocessed,source)
+        .C/.H(source file)--preprocessor--> .I(preprocessed,source)
 
-<<--assembler--  .S(assemply code)     <--compiler--
+        <<--assembler--  .S(assemply code)     <--compiler--
 
-.O(object file, libraries) --linker--> .exe(executable).
+        .O(object file, libraries) --linker--> .exe(executable).
 
 
 - Preprocessor: gcc -E file1.c -o file1.i
@@ -88,11 +88,11 @@ void ten (int SoLuong_input,...){
 
         //va_list sometext (lưu trữ các biến đối số(...)được truyền vào hàm "ten")
 
-        //va_start (sometext, SoLuong_input): Dùng để bắt đầu truy cập vào danh sách các biến đối số và cập nhật con trỏ đến vị trí đầu tiên trong danh sách
-        //va_list sometext (lưu trữ các biến đối số(...)được truyền vào hàm "ten")
         //va_start (sometext, SoLuong_input): Dùng để bắt đầu truy cập vào danh sách các biến đối số và cập nhật con trỏ đến vị trí đầu tiên trong danh sách.
         
-for(int i = 0; i < SoLuong_input; i++){
+        
+for(int i = 0; i < SoLuong_input; i++)
+{
     printf("hjksdf: %d\n", va_arg(va, int));
 
         //va_arg: dùng để lấy giá trị từng biến và cập nhật vị trí con trỏ trong danh sách
