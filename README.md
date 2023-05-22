@@ -8,11 +8,11 @@
 - Quá trình tiền xử lý: 
 
 
-.C/.H(source file)--preprocessor--> .I(preprocessed,source)
+    .C/.H(source file)--preprocessor--> .I(preprocessed,source)
 
     <<--assembler--  .S(assemply code)     <--compiler--
 
-.O(object file, libraries) --linker--> .exe(executable)
+    .O(object file, libraries) --linker--> .exe(executable).
 
 
 - Preprocessor: gcc -E file1.c -o file1.i
@@ -83,12 +83,15 @@ vidu:
 #include<stdarg>
 
 void ten (int SoLuong_input,...){
+
         //(...): thể hiện các giá trị đằng sau
 
         //va_list sometext (lưu trữ các biến đối số(...)được truyền vào hàm "ten")
 
         //va_start (sometext, SoLuong_input): Dùng để bắt đầu truy cập vào danh sách các biến đối số và cập nhật con trỏ đến vị trí đầu tiên trong danh sách
-
+        //va_list sometext (lưu trữ các biến đối số(...)được truyền vào hàm "ten")
+        //va_start (sometext, SoLuong_input): Dùng để bắt đầu truy cập vào danh sách các biến đối số và cập nhật con trỏ đến vị trí đầu tiên trong danh sách.
+        
 for(int i = 0; i < SoLuong_input; i++){
     printf("hjksdf: %d\n", va_arg(va, int));
 
@@ -98,7 +101,8 @@ for(int i = 0; i < SoLuong_input; i++){
 
 }
 
-int main(){
+int main()
+{
     ten(5(SoLuong_input), 2, 4, 3, 6, 1);
     return 0;
 }
@@ -160,8 +164,9 @@ Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t
 
 #BAI5_PHANVUNGNHO(MCU)(trenRAM)
 
-vidu: int a; (.bss)
-      int b = 42; (.data)
+vidu: 
+        int a; (.bss)
+        int b = 42; (.data)
 
       void main(void)  (.text)
       {
