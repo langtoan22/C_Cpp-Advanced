@@ -8,11 +8,10 @@
 - Quá trình tiền xử lý: 
 
 
-        .C/.H(source file)--preprocessor--> .I(preprocessed,source)
+        .C/.H(source file) --preprocessor--> .I(preprocessed,source) --assembler--> .S(assemply code)
 
-        <<--assembler--  .S(assemply code)     <--compiler--
+                 .exe(executable) <--linker--  .O(object file, libraries) <--compiler--    
 
-        .O(object file, libraries) --linker--> .exe(executable).
 
 
 - Preprocessor: gcc -E file1.c -o file1.i
@@ -168,12 +167,12 @@ vidu:
         int a; (.bss)
         int b = 42; (.data)
 
-      void main(void)  (.text)
-      {
+    void main(void)  (.text)
+    {
         int c;
         a=10;
         cong(a,b);
-      }
+    }
 
 ==> sections
 
