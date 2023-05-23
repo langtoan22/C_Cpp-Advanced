@@ -261,11 +261,11 @@ vidu:
 - Sử dụng typedef để định nghĩa ngắn gọn lại
 
 vidu: 
-typedef struct{
-    int ngay;
-    int thang;
-    int nam;
-}typeDate;
+            typedef struct{
+                int ngay;
+                int thang;
+                int nam;
+            }typeDate;
 
 /Sizeof_Struct:
 
@@ -300,50 +300,50 @@ Căn cứ vào member có kích thước lớn nhất là "thang"=4 byte nên m�
 
 vidu 2:
 
-uint8_t ngay;//1 byte = 1 byte + 7 byte bộ nhớ đệm= 8 byte
-uint64_t tuan;// 8 byte = 8 byte
-uint16_t nam;// 2 byte = 2 byte + 6 byte bộ nhớ đệm = 2 byte + 4 byte + 2 byte bộ nhớ đệm = 8 byte 
-uint32_t thang;// 4 byte = 0 
+    uint8_t ngay;//1 byte = 1 byte + 7 byte bộ nhớ đệm= 8 byte
+    uint64_t tuan;// 8 byte = 8 byte
+    uint16_t nam;// 2 byte = 2 byte + 6 byte bộ nhớ đệm = 2 byte + 4 byte + 2 byte bộ nhớ đệm = 8 byte 
+    uint32_t thang;// 4 byte = 0 
 
 Kích thước mỗi lần quét lớn nhất là 8 byte.
 
-uint8_t ngay;// 1 byte = 1 byte + 7 byte đệm
-    So sánh thấy 7 byte đệm của "ngay" không chứa đủ 8 byte của "tuan" nên kích thước của "tuan" là 8byte sau lần quét thứ 2.
-uint64_t tuan;// 8byte = 8 byte
-    Kích thước của "tuan" được sử dụng hết nên kích thước "thang" được sử dụng trong 8 byte sau lần quét thứ 3.
-uint16_t thang;// 2 byte = 2 byte + 6 byte đệm
-    Ta có 6 byte bộ đệm của "thang" chứa đủ 4 byte của "nam" nên 4 byte của "nam" được sử dụng ở trong 6 byte bộ đệm của "thang".
-    ==>2 byte + 4 byte + 2 byte bộ nhớ đệm.
-uint32_t nam;// 4 byte = 0
+    uint8_t ngay;// 1 byte = 1 byte + 7 byte đệm
+        So sánh thấy 7 byte đệm của "ngay" không chứa đủ 8 byte của "tuan" nên kích thước của "tuan" là 8byte sau lần quét thứ 2.
+    uint64_t tuan;// 8byte = 8 byte
+        Kích thước của "tuan" được sử dụng hết nên kích thước "thang" được sử dụng trong 8 byte sau lần quét thứ 3.
+    uint16_t thang;// 2 byte = 2 byte + 6 byte đệm
+        Ta có 6 byte bộ đệm của "thang" chứa đủ 4 byte của "nam" nên 4 byte của "nam" được sử dụng ở trong 6 byte bộ đệm của "thang".
+        ==>2 byte + 4 byte + 2 byte bộ nhớ đệm.
+    uint32_t nam;// 4 byte = 0
 
 ==> sizeof = 24byte
 
 
 vidu 3:
 
-uint8_t ngay[3];//1 byte = 3 byte + 1 byte đệm =  4 byte
-uint16_t nam[4];// 2byte = 8 byte 
-uint32_t thang[5];// 4 byte = 20 byte
+        uint8_t ngay[3];//1 byte = 3 byte + 1 byte đệm =  4 byte
+        uint16_t nam[4];// 2byte = 8 byte 
+        uint32_t thang[5];// 4 byte = 20 byte
 
 kích thước mỗi lần quét là 4byte;
 
-uint8_t ngay;// 1byte
-uint8_t ngay;// 1byte
-uint8_t ngay;// 1byte
-==> 3 byte + 1byte đệm = 4 byte
+        uint8_t ngay;// 1byte
+        uint8_t ngay;// 1byte
+        uint8_t ngay;// 1byte
+        ==> 3 byte + 1byte đệm = 4 byte
 
-uint16_t nam;//2byte
-uint16_t nam;//2byte
-uint16_t nam;//2byte
-uint16_t nam;//2byte
-==> 4 byte + 4 byte = 8 byte
+        uint16_t nam;//2byte
+        uint16_t nam;//2byte
+        uint16_t nam;//2byte
+        uint16_t nam;//2byte
+        ==> 4 byte + 4 byte = 8 byte
 
-uint32_t thang;//4byte
-uint32_t thang;//4byte
-uint32_t thang;//4byte
-uint32_t thang;//4byte
-uint32_t thang;//4byte
-==> 20 byte
+        uint32_t thang;//4byte
+        uint32_t thang;//4byte
+        uint32_t thang;//4byte
+        uint32_t thang;//4byte
+        uint32_t thang;//4byte
+        ==> 20 byte
 
 ==> sizeof = 32 byte
 
@@ -351,21 +351,21 @@ vidu 4:
 
 kích thước mỗi lần quét là 4 byte.
 
-uint8_t ngay[3];//1 byte = 3byte + 1 byte đệm = 4 byte
-uint32_t thang[4];//4 byte = 16 byte
-uint16_t nam[5];// 2 byte = 8 byte + (2 byte + 2 byte bộ đệm) = 12 byte
+        uint8_t ngay[3];//1 byte = 3byte + 1 byte đệm = 4 byte
+        uint32_t thang[4];//4 byte = 16 byte
+        uint16_t nam[5];// 2 byte = 8 byte + (2 byte + 2 byte bộ đệm) = 12 byte
 
 ==> sizeof = 32 byte
 
 vidu 5: 
 
-kích thước mỗi lần quét là 8 byte: 
-uint8_t ngay[3];//1 byte = 3 byte + 5 byte đệm = 8 byte
-uint32_t thang[4];// 4 byte 
-= 4 byte lần đầu sử dụng trong 5 byte bộ đệm của "ngay" (3 byte + 4 byte + 1 byte đệm)
-2*4 =8 byte + (4 byte + 4 byte đệm) = 16 byte
+        kích thước mỗi lần quét là 8 byte: 
+        uint8_t ngay[3];//1 byte = 3 byte + 5 byte đệm = 8 byte
+        uint32_t thang[4];// 4 byte 
+        = 4 byte lần đầu sử dụng trong 5 byte bộ đệm của "ngay" (3 byte + 4 byte + 1 byte đệm)
+        2*4 =8 byte + (4 byte + 4 byte đệm) = 16 byte
 
-unit64_t tuan[3];//8 byte = 3 * 8 =  24 byte
-uint16_t nam[5];// 2byte = 2*4 =  8 byte + (2 byte + 6 byte đệm) = 16 byte
+        unit64_t tuan[3];//8 byte = 3 * 8 =  24 byte
+        uint16_t nam[5];// 2byte = 2*4 =  8 byte + (2 byte + 6 byte đệm) = 16 byte
 
 ==> sizeof = 64 byte
