@@ -111,7 +111,10 @@ int main()
 
 #BAI4_VARIABLE
 
-Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t
+Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t(kích thước của biến)
+
+uint8_t = 1 byte
+uint16_t = 2 byte
 
 /Biến static(4_1.main):
 
@@ -206,6 +209,12 @@ vidu:
 
         vidu: int global = 100;
               static int = 100;
+            
+            nằm trong hàm main nhưng khai báo với viến static
+
+              int main(){
+                static int = 100;
+              }
 
         Chú ý: căn cứ giá trị gán ở lần đầu tiên để phân vùng
 
@@ -230,7 +239,7 @@ vidu:
         * Có quyền Read và write(đọc và sửa); 
         * Được sử dụng cấp phát cho biến local(cục bộ):
             input parameter
-            Được khai báo bên trong một block code '{'và'}'
+            Được khai báo bên trong một block code '{'và'}' (vidu ham main(){this code})
         * Sẽ được giải phóng khi ra khỏi block code/hàm;
 
 
@@ -241,3 +250,122 @@ vidu:
         * Sẽ giải phóng khi gọi hàm free...; 
 
         Phân vùng heap không có cơ chế thu hồi bộ nhớ mà phải dùng đến hàm free (5.7.c)
+
+
+
+#BAI6_STRUCT_UNION
+
+/STRUCT(6_1_struct.c)
+
+- Là kiểu dữ liệu do người dùng tự định nghĩa giống như int, double
+- Sử dụng typedef để định nghĩa ngắn gọn lại
+
+vidu: 
+typedef struct{
+    int ngay;
+    int thang;
+    int nam;
+}typeDate;
+
+/Sizeof_Struct:
+
+- căn cứ vào member có kích thước lớn nhất để lấy kích thước lớn nhất cho từng member sau mỗi lần quét các member đó.
+
+    Ta có kích thước byte lớn nhất của các lần quét là là Z byte
+
+    + Quét "lần 1" có X byte: gồm có A byte sử dụng và B byte bộ nhớ đệm trong Z byte.
+    
+    + Quét "lần 2" có Y byte, nhưng so sánh kích thước của B byte bộ nhớ đệm lần quét 1 và kích thước lần quét 2.
+
+        * Nếu kích thước lần quét 2 nhỏ hơn kích thước Zbyte bộ nhớ đệm lần quét 1 thì ta đưa "lần 2" vào sử dụng bộ nhớ đệm của lần quét 1.
+        * Nếu kích thước lần quét 2 lớn hơn kích thước Zbyte bộ nhớ đệm lần quét 1 thì phải sử dụng kích thước lần quét 2 là Z byte.
+    + Các lần quét tiếp theo tương tự
+
+    vidu:
+
+Căn cứ vào member có kích thước lớn nhất là "thang"=4 byte nên mỗi lần quét các member khác cũng có kích thước lớn nhất là 4byte
+
+    uint8_t ngay;//1 byte = 1 byte + 3byte bộ nhớ đệm = 4 byte (sử dụng 1byte + 3 byte không sử dụng đến)
+
+    So sánh thì lần quét 2 bằng 4 lớn hơn 3byte bộ nhớ đệm lần quét 1 ==> sử dung kích thước lần quét 2
+
+    uint32_t thang;//4 byte = 4 byte (sử dụng hết 4 byte)
+
+    Vì kích thước lần quét 2 đã sử dụng hết nên quét 3 ta sử dụng kích thước của lần quét 3.
+
+    uint16_t nam;//2 byte = 2 byte + 2byte bộ nhớ đệm = 4 byte(sử dụng 2 byte + 2 byte không sử dụng đến)
+
+==>sizeof ngay,thang và nam là:(1byte + 3byte bộ nhớ đệm) +  4byte + (2byte + 2byte bộnhớ đệm) = 12byte
+
+
+vidu 2:
+
+uint8_t ngay;//1 byte = 1 byte + 7 byte bộ nhớ đệm= 8 byte
+uint64_t tuan;// 8 byte = 8 byte
+uint16_t nam;// 2 byte = 2 byte + 6 byte bộ nhớ đệm = 2 byte + 4 byte + 2 byte bộ nhớ đệm = 8 byte 
+uint32_t thang;// 4 byte = 0 
+
+Kích thước mỗi lần quét lớn nhất là 8 byte.
+
+uint8_t ngay;// 1 byte = 1 byte + 7 byte đệm
+    So sánh thấy 7 byte đệm của "ngay" không chứa đủ 8 byte của "tuan" nên kích thước của "tuan" là 8byte sau lần quét thứ 2.
+uint64_t tuan;// 8byte = 8 byte
+    Kích thước của "tuan" được sử dụng hết nên kích thước "thang" được sử dụng trong 8 byte sau lần quét thứ 3.
+uint16_t thang;// 2 byte = 2 byte + 6 byte đệm
+    Ta có 6 byte bộ đệm của "thang" chứa đủ 4 byte của "nam" nên 4 byte của "nam" được sử dụng ở trong 6 byte bộ đệm của "thang".
+    ==>2 byte + 4 byte + 2 byte bộ nhớ đệm.
+uint32_t nam;// 4 byte = 0
+
+==> sizeof = 24byte
+
+
+vidu 3:
+
+uint8_t ngay[3];//1 byte = 3 byte + 1 byte đệm =  4 byte
+uint16_t nam[4];// 2byte = 8 byte 
+uint32_t thang[5];// 4 byte = 20 byte
+
+kích thước mỗi lần quét là 4byte;
+
+uint8_t ngay;// 1byte
+uint8_t ngay;// 1byte
+uint8_t ngay;// 1byte
+==> 3 byte + 1byte đệm = 4 byte
+
+uint16_t nam;//2byte
+uint16_t nam;//2byte
+uint16_t nam;//2byte
+uint16_t nam;//2byte
+==> 4 byte + 4 byte = 8 byte
+
+uint32_t thang;//4byte
+uint32_t thang;//4byte
+uint32_t thang;//4byte
+uint32_t thang;//4byte
+uint32_t thang;//4byte
+==> 20 byte
+
+==> sizeof = 32 byte
+
+vidu 4: 
+
+kích thước mỗi lần quét là 4 byte.
+
+uint8_t ngay[3];//1 byte = 3byte + 1 byte đệm = 4 byte
+uint32_t thang[4];//4 byte = 16 byte
+uint16_t nam[5];// 2 byte = 8 byte + (2 byte + 2 byte bộ đệm) = 12 byte
+
+==> sizeof = 32 byte
+
+vidu 5: 
+
+kích thước mỗi lần quét là 8 byte: 
+uint8_t ngay[3];//1 byte = 3 byte + 5 byte đệm = 8 byte
+uint32_t thang[4];// 4 byte 
+= 4 byte lần đầu sử dụng trong 5 byte bộ đệm của "ngay" (3 byte + 4 byte + 1 byte đệm)
+2*4 =8 byte + (4 byte + 4 byte đệm) = 16 byte
+
+unit64_t tuan[3];//8 byte = 3 * 8 =  24 byte
+uint16_t nam[5];// 2byte = 2*4 =  8 byte + (2 byte + 6 byte đệm) = 16 byte
+
+==> sizeof = 64 byte
