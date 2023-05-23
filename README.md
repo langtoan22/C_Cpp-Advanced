@@ -261,7 +261,8 @@ vidu:
 - Sử dụng typedef để định nghĩa ngắn gọn lại
 
 vidu: 
-            typedef struct{
+            typedef struct
+            {
                 int ngay;
                 int thang;
                 int nam;
