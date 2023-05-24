@@ -124,7 +124,7 @@ uint16_t = 2 byte
             printf("temp: %d\n", temp);
             temp++;
 
-- Biến cục bố dùng static: khi gọi thì biến khởi tạo giá trị chỉ một lần và cố định địa chỉ giá trị đó tồn tại hết vòng đời của chương trình(sau khi kết thúc thì mới thu hồi lại địa chỉ trên bộ nhớ Ram), và lần gọi thứ hai của biến thì giá trị sẽ được tiếp tục.
+- Biến cục bộ dùng static: khi gọi thì biến khởi tạo giá trị chỉ một lần và cố định địa chỉ giá trị đó tồn tại hết vòng đời của chương trình(sau khi kết thúc thì mới thu hồi lại địa chỉ trên bộ nhớ Ram), và lần gọi thứ hai của biến thì giá trị sẽ được tiếp tục.
 
     vidu:   static uint8_t temp = 0;
             printf("temp: %d\n", temp);
@@ -140,11 +140,11 @@ uint16_t = 2 byte
 
 - vì runcode chỉ build được một file duy nhất nên ta dùng:
 
-    (gcc file1.c file2.c -o file1) file1 là file dùng extern.
+            (gcc file1.c file2.c -o file1) file1 là file dùng extern.
 
-    gcc 4_3_extern.c 4_2_test.c -o 4_3_extern 
+            gcc 4_3_extern.c 4_2_test.c -o 4_3_extern 
 
-    ./4_3_extern (./file1)
+            ./4_3_extern (./file1)
 
 /Register
 
@@ -268,7 +268,7 @@ vidu:
                 int nam;
             }typeDate;
 
-/Sizeof_Struct:
+/Sizeof_Struct(6_2_SizeofStruct.c):
 
 - căn cứ vào member có kích thước lớn nhất để lấy kích thước lớn nhất cho từng member sau mỗi lần quét các member đó.
 
@@ -370,3 +370,63 @@ vidu 5:
         uint16_t nam[5];// 2byte = 2*4 =  8 byte + (2 byte + 6 byte đệm) = 16 byte
 
 ==> sizeof = 64 byte
+
+/UNION(6_3_union.c)
+
+- Giống như Struct, Union cũng là kiểu dữ liệu do ngườ dùng tự định nghĩa. 
+- Giá trị của các biến trong Union đều giống nhau và bằng giá trị của biến được khởi tạo cuối cùng vì các biến trong Union đều cùng một địa chỉ nên khi khởi tạo thì giá trị sau sẽ ghi đè lên giá trị trước.
+
+- Kích thước của Union là kích thước của member lớn nhất.
+
+    vidu:
+
+                #include <stdio.h>
+                #include <stdint.h>
+                #include <string.h>
+
+                typedef union 
+                {
+
+                uint8_t var1[5]; // char
+                uint16_t var2[2]; // long
+
+                }typeData;
+
+                int main(int argc, char const *argv[])
+                {
+                    typeData data ;
+
+                    for(int i = 0; i < 5; i++){
+                        data.var1[i] = i; // 0 1 2 3 4
+                    }
+
+                    for(int i = 0; i < 2; i++){
+                        data.var2[i] = 2*i ;  // 0 2
+                    }
+
+                    for(int i = 0; i < 5 ; i++){
+                        printf("test1: %d\n", data.var1[i]);
+                    }
+                
+                    return 0;
+                }
+
+
+kết quả là: 0 0 2 0 4
+- var1 có kết quả là: 0 1 2 3 4 (var1 có giá trị 1 byte nên mỗi ô là một giá trị i)
+- var2 có kết quả là: 0 0 2 0 (vì var 2 có giá trị là 2 byte nên ô lưu trữ đầu tiên là giá trị i và ô lưu trữ thứ 2 là giá trị 0)
+- do cùng một địa chỉ nên var2 sẽ ghi đè lên var1 sau đó var2 = var1 
+- do đó kết quả cuối cùng là: 0 0 2 0 4
+
+
+/TỔNG KẾT.
+
+        - Struct:
+            + là kiểu dữ liệu do người dùng tự định nghĩa;
+            + Kích thước là tổng các member cộng lại (byte sử dụng và byte bộ nhớ đệm);
+            + Mỗi member của struct đều có địa chỉ riêng nên khi thay đổi giá trị của một member thì không ảnh hưởng đến member khác.
+
+        - Union:
+            + là kiểu dữ liệu do người dùng tự định nghĩa;
+            + Kích thước của union sẽ là kích thước của member lớn nhất;
+            + Các member trong Union đều dùng chung một địa chỉ nên khi thay đổi một giá trị member thì sẽ ảnh hưởng đến giá trị các member khác
