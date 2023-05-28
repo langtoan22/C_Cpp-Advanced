@@ -430,3 +430,27 @@ kết quả là: 0 0 2 0 4
             + là kiểu dữ liệu do người dùng tự định nghĩa;
             + Kích thước của union sẽ là kích thước của member lớn nhất;
             + Các member trong Union đều dùng chung một địa chỉ nên khi thay đổi một giá trị member thì sẽ ảnh hưởng đến giá trị các member khác
+
+#BAI7_GOTO
+
+/GOTO(7_1_GOTO.c)
+
+- Cung cấp 1 bước nhảy từ 'goto' đến một câu lệnh có label
+- label có thể là một văn bản thuần túy trừ từ khóa C, label có thể được đặt ở bất kì đâu trong chương trình có thể ở trên hoặc dưới câu lệnh 'goto'.
+
+            vidu:
+
+            label:
+            statement(
+            goto labe:
+            )
+/EXIT(7_2_EXIT.c)
+
+- Sử dụng thư viện stdlib.h để dùng Exit
+- Exit: dừng lại chương trình chứ không thoát khỏi
+
+
+/SETJUM(7_3_SETJUM.C)
+
+- Sử dụng thư viện setjmp.h để dùng setjum
+- sử dụng setjmp với TRY CATCH THROW để khi chương trình có lỗi thì mọi sẽ dừng lại đê ưu tiên xử lý lỗi trước và trỏ con trỏ đến vùng lỗi để xử lý (rất phức tạp khi không dùng setjmp ở các vòng lặp)
