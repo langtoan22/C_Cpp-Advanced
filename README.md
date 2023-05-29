@@ -1,3 +1,4 @@
+
 # BÀI 1:
 
 - Ngôn ngữ bậc cao (c/c++, java...) --Compiler--> Ngôn ngữ bậc thấp (nhị phân, ngôn ngữ mtinh)
