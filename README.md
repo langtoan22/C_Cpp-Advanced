@@ -94,19 +94,19 @@ vidu:
     }
 '''
 
-        - (...): thể hiện các giá trị đằng sau
+- (...): thể hiện các giá trị đằng sau
 
-        - va_list sometext (lưu trữ các biến đối số(...)được truyền vào hàm "ten")
+- va_list sometext (lưu trữ các biến đối số(...)được truyền vào hàm "ten")
 
-        - va_start (sometext, SoLuong_input): Dùng để bắt đầu truy cập vào danh sách các biến đối số và cập nhật con trỏ đến vị trí đầu tiên trong danh sách.
-        - va_arg: dùng để lấy giá trị từng biến và cập nhật vị trí con trỏ trong danh sách
+- va_start (sometext, SoLuong_input): Dùng để bắt đầu truy cập vào danh sách các biến đối số và cập nhật con trỏ đến vị trí đầu tiên trong danh sách.
+-  va_arg: dùng để lấy giá trị từng biến và cập nhật vị trí con trỏ trong danh sách
 
 # BAI4_VARIABLE
 
-Sử dụng thư viện stdint.h để dùng các kiểu dữ liêu uint _t(kích thước của biến)
+Sử dụng thư viện **stdint.h** để dùng các kiểu dữ liêu uint_t (kích thước của biến)
 
-uint8_t = 1 byte
-uint16_t = 2 byte
+        uint8_t = 1 byte
+        uint16_t = 2 byte
 
 ## 1. Biến static(4_1.main):
 
@@ -464,4 +464,164 @@ Các member trong Union đều dùng chung một địa chỉ nên khi thay đ�
 - Sử dụng thư viện setjmp.h để dùng setjum
 - sử dụng setjmp với TRY CATCH THROW để khi chương trình có lỗi thì mọi sẽ dừng lại đê ưu tiên xử lý lỗi trước và trỏ con trỏ đến vùng lỗi để xử lý (rất phức tạp khi không dùng setjmp ở các vòng lặp)
 
-  
+# BÀI 8: POINTER
+
+## 1. con trỏ
+- con trỏ là một biến, nhưng biến ở đây là một địa chỉ nào đó bất kì trong bộ nhớ RAM(//0xc1).
+
+- Khai báo biến bình thường: 
+    >int a = 10; //chứa giá trị của biến a
+- khai báo con trỏ (**decreling pointer**):
+    >int *ptr;
+- khởi tạo và gán giá trị cho con trỏ (**initializing and Assigning value to pointer**):
+    >ptr = &a; //gán địa chỉ của a cho con trỏ
+
+    địa chỉ của biến a là giá trị của con trỏ:
+
+        printf("địa chỉ của biến a là: %d", &a);
+        nó tương tự 
+        printf(" giá trị của con trỏ là ptr: %d", ptr);
+    giá trị của biến a giá trị mà con trỏ ptr đang quản lý hoặc trỏ đến hoặc toán tử giải tham chiếu (**the indirection * operator/dereferencing operator**)
+
+        printf("giá trị của biến a: %d," a);
+        tương tự
+        printf("giá trị mà con trỏ ptr đang quản lý: %d", *ptr);
+
+    **Chú ý:** 
+
+    - "*ptr" ở khai báo là **con trỏ**
+    - "*ptr" sử dụng ở những câu lệnh bên dưới sau khi khai báo xong là **toán tự giải tham chiếu**. truy cập vào giá trị mà con trỏ đang trỏ tới (địa chỉ cảu biến) để thay đổi giá trị của biến.
+
+- Thông qua con trỏ có thể thay đối giá trị của biến a = 10.
+
+    >*ptr = 100 // tương ứng với a = 100
+
+    vì khi con trỏ (int *ptr) tham chiếu tới biến a thì toán tử giải tham chiếu (*ptr) chính là giá trị của biến a, khi thay đổi hay tăng giảm sẽ trực tiếp ảnh hưởng đến giá trị ô nhớ.
+
+**Vidu:**
+
+        #include <stdio.h>
+
+        int a = 5;
+
+        void tong(){
+            printf("hello\n");
+        }
+
+        int main(int argc, char const *argv[])
+        {
+            int *ptr = &a;
+            *ptr = 27;
+
+            printf("dia chi cua a: %p\n", ptr);
+            printf("gia tri a: %d\n", *ptr);
+            printf("gia tri a: %d\n", a);
+
+            printf("dia chi cua tong: %p\n", ptr);
+            return 0;
+        }
+
+
+- con trỏ có địa chỉ là 0x00 và giá trị là 0 được gọi là con trỏ NULL.
+- khi mà không còn nhu cầu sử dụng con trỏ đã khai báo thì gán con trỏ đó bằng NULL:
+    > int *ptr = NULL;
+## 2. con trỏ hàm
+
+- Khai báo con trỏ hàm: 
+    >type (*ptr) ( para_type_1, 
+    para_type_2,...);
+- Gán địa chỉ của hàm cho con trỏ hàm:
+    >ptr = &function();
+
+**Vidu**:
+
+    #include <stdio.h>
+
+    void tong (int a, int b){
+        printf("tong %d va %d = %d \n", a, b, a+b);
+
+    }
+
+    float tich (float a, float b){
+    return a*b;
+
+    }
+
+    int main(int argc, char const *argv[])
+    {
+        void(*ptr)(int, int);
+        ptr = &tong;
+        ptr(9,8);
+
+        float(*ptr_tich)(float, float);
+        ptr_tich = &tich;
+        printf("tich: %f",ptr_tich(5.3, 5.6));
+        return 0;
+    }
+
+- con trỏ đặc biệt: là con trỏ có thể lưu các giá trị địa chỉ khác kiểu dữ liệu.
+    >void *ptr = &a
+
+## 3 Mối quan hệ của mảng và con trỏ
+
+- Tên của mảng là một hằng con trỏ (địa chỉ không thay đổi được) 
+- Giá trị của hằng con trỏ là địa chỉ của phần tử đầu tiên của mảng
+
+**Vidu:**
+
+        #include <stdio.h>
+        int main(int argc, char const *argv[])
+        {
+            int a[5] = {1, 2, 3 , 4, 5 };
+
+            printf("giá trị của a: %d\n", a); // a là hằng con trỏ
+            printf("địa chỉ của phần tử a[0]: %d\n", &a[0]); // giá trị của hằng trỏ là địa chỉ của a[0]
+            return 0;
+        }
+        
+- Gán mảng cho một con trỏ thì có thể sử dụng con trỏ để thực hiện các thao tác giá trị, chỉ số của một mảng với điều kiện là trỏ một con trỏ tới địa chỉ đầu tiên của mảng a và sau đó có thể sử dụng như một cái mảng mặc dù nó là con trỏ
+
+**Vidu:**
+
+        #include <stdio.h>
+        int main(int argc, char const *argv[])
+        {
+        int a[5] = {1, 2, 3 , 4, 5 };
+        int *ptr = a;
+        for(int i = 0; i < 5; i++){
+
+        printf("gia tri cua mang: \n");
+        printf("%d", ptr[i]);
+            }
+            return 0;
+
+        }
+- có thể sử dụng các toán tử ++ --... cho con trỏ khi đã gán mảng cho con trỏ.
+> ++ptr;
+## 4. con trỏ tới con trỏ (pointer to pointer)
+- là con trỏ cấp 2 có giá trị là lưu địa của con trỏ cấp 1.
+
+![](https://github.com/langtoan22/image_C_Cpp_Advanced/blob/main/bai8_PointerToPointer.png?raw=true)
+
+**vidu**: int **ptr;
+
+        #include <stdio.h>
+
+        int main(int argc, char const *argv[])
+    {
+        int a = 10;
+        int *ptr = &a;
+        int **ptr1 = &ptr;
+
+
+        printf("gia tri cua bien a: %d\n", a); //10
+        printf("dia chi cua bien a: %d\n", &a);//0xc1
+
+        printf("gia tri cua bien trong ptr: %d\n", *ptr);//10
+        printf("dia chi cua bien trong ptr: %d\n", ptr);//0xc1
+
+        printf("gia tri cua bien trong ptr1: %d\n", **ptr1);//10
+        printf("dia chi cua bien trong ptr1: %d\n", ptr1);//0xc2
+
+        return 0;
+    }
