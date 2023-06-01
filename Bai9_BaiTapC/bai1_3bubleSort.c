@@ -4,30 +4,26 @@
 //cho mang ngau nhien: uint8_t array[] = {1, 3, 5, 2, 3, 4, 5, 6, 2, 6, 9, 6, 7}
 // hay sap xep theo thu tu tu be den lon
 
+// ham thay doi gia vi tri 
+void swap (uint8_t array[], int i, int j){
+    int temp =  array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}
 
-void selectionSort ( uint8_t soLuong, uint8_t array[]){
-    for(int i = 0; i < soLuong - 1; i++){
-
-    // dung 1 bien de luu gia tri nho nhat
-       int  min_index = i;
-
-       // Duyet tat ca cac phan tu dung sau phan tu hien tai va cap nhat lai gia tri nho nhat
-        for(int j = i+1; j < soLuong; j++){
-            if(array[j] < array [min_index]){
-                min_index = j;
+void sortList (uint8_t soLuong, uint8_t array[]){
+    for(int i = 0; i< soLuong - 1; i++){
+        for(int j = 0; j < soLuong - i - 1; j++){
+            if(array[j] > array[j+1]){
+                swap(array, j, j+1);
             }
         }
-
-        // doi vi tri cua gia tri thu i voi gia tri nho nhat
-          uint8_t temp = array[i];
-          array[i] = array[min_index];
-          array[min_index] = temp;
     }
 }
 
 int main(int argc, char const *argv[])
 {
-    uint8_t soLuong;
+      uint8_t soLuong;
     uint8_t array [100];
     printf("nhap so luong cua mang: ");
     scanf("%d", &soLuong);
