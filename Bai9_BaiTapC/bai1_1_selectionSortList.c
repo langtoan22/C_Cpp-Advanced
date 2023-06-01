@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-//cho mang ngau nhien: uint8_t array[] = {1, 3, 5, 2, 3, 4, 5, 6, 2, 6, 9, 6, 7}
-// hay sap xep theo thu tu tu be den lon
+
 
 
 void selectionSort ( uint8_t soLuong, uint8_t array[]){
