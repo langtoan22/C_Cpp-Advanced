@@ -5,8 +5,8 @@
 // hay sap xep theo thu tu tu be den lon
 
 void sortList (uint8_t soLuong, uint8_t array[]){
-    for(int i = 0; i < soLuong; i++){
-        for(int j = i+1; j < soLuong; j++){
+    for(int i = 0; i < soLuong -1  ; i++){
+        for(int j = i + 1 ; j < soLuong ; j++){ 
             if(array[j] < array[i]){
                 int temp = array[i];
                 array[i] = array[j];
