@@ -625,3 +625,61 @@ Các member trong Union đều dùng chung một địa chỉ nên khi thay đ�
 
         return 0;
     }
+
+# BAI 10: LINK LIST
+## 1. TỔNG QUÁT VỀ LINKLIST(10_1_LinkList.c)
+Tạo mảng nhân tạo có đặc trưng giống mảng truyền thống nhưng nó có thể chèn hoặc bớt ngẫu nhiên các phần tử vào mảng.
+
+Nhược điểm: thời gian truy cập tuyến tính vì không phải là các ô nhớ liền kề nhau nên không thể truy cập ngẫu nhiên các ô nhớ bằng chỉ số mà phải duyệt từng giá trị một theo thứ tự.
+
+Gồm 2 phần: dữ liệu bài toán và một tham chiếu (hay liên kết) tới các phần tử đứng sau kế tiếp
+
+![](https://github.com/langtoan22/image_C_Cpp_Advanced/blob/main/bai10_linkList.png?raw=true)
+
+            struct Node {
+                uint8_t value; 
+                struct Node *next;
+            };
+            typedef struct Node node;
+
+- value: dữ liệu của node;
+- node *next: con trỏ thuộc kiểu node tên next và lưu địa chỉ của phần tử đứng sau
+
+Next của phần tử cuối cùng bao giờ cũng trỏ vào NULL.
+
+## 2. CÁC HÀM TRONG LINKLIST
+
+Gồm các hàm như chèn, xóa, sắp xếp...
+### 2.1. CẤP PHÁT ĐỘNG MỘT NODE MỚI
+
+Cấp phát động với dữ liệu uint8_t là value:
+
+            node* createNode(uint8_t value2){
+            node* node2 = (node*) malloc(sizeof(node));
+            node2->value1 = value2;
+            node2->next = NULL;
+            return node2;
+            }
+
+## 3. CẤP PHÁT ĐỘNG (10_2_CapPhatDong.c)
+### 3.1. malloc
+
+Dùng thư viện **stdlib.h** để dùng malloc.
+
+Trong khi array là một mảng tĩnh không thể thay đổi kích thước được thì malloc là mảng động có thể thay đổi kích thước được.
+
+Con trỏ lưu địa chỉ đầu tiên thì mảng lưu các địa chỉ liền kề
+
+    >void malloc(sizeof(kiểu dữ liệu )* kích thước cần cấp phát); 
+
+- malloc sẽ trả về hàm void nên cần phải ép kiểu;
+
+    >vidu: (uint8_t*)malloc(sizeof(uint8_t)*5); //lấy 5 bộ nhớ 1byte liền kề nhau kiểu uint8_t
+
+
+### 3.2. realloc 
+
+Dùng để mở rộng thêm bộ nhớ cấp phát động của mảng động (malloc)
+    >ptr = void realloc(ptr, sizeof(kiểu dữ liệu) * kích thước tổng cấp phát)
+
+vidu:  ptr = (uint8_t*)realloc(ptr, sizeof(uint8_t)*8 );
