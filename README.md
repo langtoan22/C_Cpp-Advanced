@@ -632,35 +632,85 @@ Tạo mảng nhân tạo có đặc trưng giống mảng truyền thống nhưn
 
 Nhược điểm: thời gian truy cập tuyến tính vì không phải là các ô nhớ liền kề nhau nên không thể truy cập ngẫu nhiên các ô nhớ bằng chỉ số mà phải duyệt từng giá trị một theo thứ tự.
 
-Gồm 2 phần: dữ liệu bài toán và một tham chiếu (hay liên kết) tới các phần tử đứng sau kế tiếp
+- Phần tử cuối cùng trong DSLK trỏ vào NULL;
+- Không lãng phí bộ nhớ nhưng cần thêm bộ nhớ để lưu phần con trỏ
+- Các phần tử trong DSLK gọi là Node và được cấp phát động và được lưu ở bộ nhớ stack;
+- Đây là CTDL cấp phát động nên khi còn bộ nhớ thì sẽ còn thêm được phần tử vào DSLK;
+
+Gồm 2 phần: dữ liệu bài toán và một tham chiếu (hay liên kết) lưu địa chỉ tới các phần tử đứng sau kế tiếp
 
 ![](https://github.com/langtoan22/image_C_Cpp_Advanced/blob/main/bai10_linkList.png?raw=true)
 
+### 1.1. DSLK đơn
+#### a. Cấu trúc tự trỏ
             struct Node {
                 uint8_t value; 
-                struct Node *next;
+                struct Node *next;// link
             };
             typedef struct Node node;
 
 - value: dữ liệu của node;
-- node *next: con trỏ thuộc kiểu node tên next và lưu địa chỉ của phần tử đứng sau
+- node *next: con trỏ thuộc kiểu node tên next và lưu địa chỉ của phần tử đứng sau mang kiểu node.
 
 Next của phần tử cuối cùng bao giờ cũng trỏ vào NULL.
+#### b. Tạo một node mới: 
 
-## 2. CÁC HÀM TRONG LINKLIST
-
-Gồm các hàm như chèn, xóa, sắp xếp...
-### 2.1. CẤP PHÁT ĐỘNG MỘT NODE MỚI
-
-Cấp phát động với dữ liệu uint8_t là value:
-
-            node* createNode(uint8_t value2){
-            node* node2 = (node*) malloc(sizeof(node));
-            node2->value1 = value2;
-            node2->next = NULL;
+        node *createNode(uint8_t value){
+            node *node2 = (node*) malloc(sizeof(node));
+            node2->value = value;
+        node2->next = NULL; // nốt mới tạo chưa liên kết với các node khác nên con trỏ trỏ tới NULL
             return node2;
-            }
+        }
 
+#### c. Thêm node vào đầu DSLK
+
+##### hàm duyệt:
+
+            void duyet (node *head){ 
+                while(p->next != NULL){
+                printf("%d", node -> value)
+                    head = head->next;
+                }
+            }
+            
+
+- p = p -> next (p->next : địa chỉ của node kế tiếp): di chuyển từng node trong DSLK
+- lấy địa chỉ của phần tử tiếp theo gán cho p khi đó p nhảy sang phần tử tiếp theo đến cuối khi p =  NULL thì vòng while dừng.
+
+##### Thêm node vào đầu DSLK:
+
+ 
+-  do hàm này làm thay đổi DSLK nên phải sử dụng truyền tham chiếu hoặc truyền con trỏ.
+
+        void pushFront (**head, uint8_t value){
+            node *newnode;
+            newnode = createNode(value);
+        //bước1: cho next của newnode trỏ vào node head hiện tại 
+            newnode -> next = *head;  //*head là địa chỉ của node head
+        //bước2: cập nhật node head bằng newnode
+            *head = newnod;
+        }
+
+#### d.Thêm node vào cuối DSLK
+
+        void push_back(node **array, uint8_t value){ 
+        node *temp, *p;
+        temp = createNode(value);
+
+        //kiểm tra giá trị của array bằng NULL
+        if(*array = NULL){ 
+            *array = temp;
+        }
+        else{ 
+            p = *array;
+        // p trỏ đến next kiểm tra khác NULL
+            while(p->next != NULL){
+                p = p->next;
+            }
+            //cho next của node p ->temp
+            p->next = temp;
+        }
+        }
 ## 3. CẤP PHÁT ĐỘNG (10_2_CapPhatDong.c)
 ### 3.1. malloc
 
