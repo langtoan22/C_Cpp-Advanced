@@ -691,28 +691,35 @@ Next của phần tử cuối cùng bao giờ cũng trỏ vào NULL.
             *head = newnod;
         }
 
-#### d.Thêm node vào cuối DSLK
+#### d.Thêm từng node vào DSLK
 
         void push_back(node **array, uint8_t value){ 
         node *temp, *p;
         temp = createNode(value);
 
-        //kiểm tra giá trị của array bằng NULL
+        //kiểm tra giá trị của array bằng NULL thì tạo một node mới.
         if(*array = NULL){ 
             *array = temp;
         }
         else{ 
+
+                //trong trường hợp ngược lại kiểm tra *array != NuLl thì gán địa chỉ con trỏ array cho p
             p = *array;
-        // p trỏ đến next kiểm tra khác NULL
+            
+                // p trỏ đến next kiểm tra khác NULL, vì là chưa có node đầu tiền nên next sẽ == NUll nên không chạy vào vòng while
+
             while(p->next != NULL){
                 p = p->next;
             }
-            //cho next của node p ->temp
+
+                //khi con trỏ next == NUll thì sẽ tạo node mới khi đó node đầu tiên sẽ lưu địa chỉ node thứ 2 rôi chạy lại vào vòng while kiểm tra .
+                
             p->next = temp;
+
         }
         }
-## 3. CẤP PHÁT ĐỘNG (10_2_CapPhatDong.c)
-### 3.1. malloc
+##  2.CẤP PHÁT ĐỘNG (10_2_CapPhatDong.c)
+### 2.1.malloc
 
 Dùng thư viện **stdlib.h** để dùng malloc.
 
@@ -727,9 +734,15 @@ Con trỏ lưu địa chỉ đầu tiên thì mảng lưu các địa chỉ li�
     >vidu: (uint8_t*)malloc(sizeof(uint8_t)*5); //lấy 5 bộ nhớ 1byte liền kề nhau kiểu uint8_t
 
 
-### 3.2. realloc 
+### 2.2.realloc 
 
 Dùng để mở rộng thêm bộ nhớ cấp phát động của mảng động (malloc)
     >ptr = void realloc(ptr, sizeof(kiểu dữ liệu) * kích thước tổng cấp phát)
 
 vidu:  ptr = (uint8_t*)realloc(ptr, sizeof(uint8_t)*8 );
+
+# BAI11: STACK
+
+Ngăn xếp (STACK) là một danh sách tuyến tính, trong đó cho phép thêm và loại bỏ một phần tử khỏi ngăn xếp luôn luôn thực hiện ở một đầu gọi là đỉnh (top).
+
+![](https://github.com/langtoan22/image_C_Cpp_Advanced/blob/main/bai11_stack.png?raw=true)

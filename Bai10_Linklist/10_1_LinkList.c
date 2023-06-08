@@ -10,7 +10,7 @@ struct Node {
 };
  typedef struct Node node;
 
-// hàm tạo liên kết mới và cấp phát động với dữ liệu uint8_t là value
+// hàm tạo node mới và cấp phát động với dữ liệu uint8_t là value
  node *createNode(uint8_t value){
     node *node2 = (node*) malloc(sizeof(node));
     node2->value = value;
@@ -18,20 +18,38 @@ struct Node {
     return node2;
  }
 
-// hàm thêm 1 node
+// hàm duyệt 
+void duyet(node *array){
+   while(array != NULL){
+      printf("%d ", array -> value);
+      array = array -> next;
+   }
+}
+
+//hàm thêm một node ở đầu DSLK
+
+void pushFront(node **array, uint8_t value){
+   node *newNode = createNode(value);
+
+   if(*array == NULL){
+      *array = newNode;
+   }
+   else{
+       newNode -> next = *array;
+      *array = newNode;
+   
+   }
+  
+}
+// hàm thêm 1 node ở cuối danh sách
 void push_back(node **array, uint8_t value){ 
    node *temp, *p;
    temp = createNode(value);
-
-//kiểm tra giá trị của array bằng NULL
    if(*array = NULL){ 
       *array = temp;
    }
    else{
-
-   // từ node thứ 2 khi array khác NULL thì giá trị con trỏ(địa chỉ) array được gán cho con trỏ p
       p = *array;
-   // p trỏ đến next kiểm tra khách NULL
       while(p->next != NULL){
          p = p->next;
       }
@@ -42,15 +60,20 @@ void push_back(node **array, uint8_t value){
  {
 
    // node * array;  
-
    // array = createNode(6);
    node *array = NULL; // 0xc1
 
-   push_back(&array, 6);
-   push_back(&array, 2);
-   push_back(&array, 7);
+   // push_back(&array, 6);
+   // push_back(&array, 2);
+   // push_back(&array, 7);
 
+   pushFront(&array, 6);
+   pushFront(&array, 5);
+   pushFront(&array, 3);
 
-    return 0;
+   duyet(array);
+   
+     
+      
+   return 0;
  }
- 
