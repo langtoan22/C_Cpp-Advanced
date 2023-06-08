@@ -743,6 +743,66 @@ vidu:  ptr = (uint8_t*)realloc(ptr, sizeof(uint8_t)*8 );
 
 # BAI11: STACK
 
+### 1.Tổng quan
 Ngăn xếp (STACK) là một danh sách tuyến tính, trong đó cho phép thêm và loại bỏ một phần tử khỏi ngăn xếp luôn luôn thực hiện ở một đầu gọi là đỉnh (top).
 
 ![](https://github.com/langtoan22/image_C_Cpp_Advanced/blob/main/bai11_stack.png?raw=true)
+
+### 1.1.Hàm kiểm tra ngăn xếp đầy
+
+// return true if stack empty else false
+
+            bool isEmpty(){
+            if(i == -1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+### 1.2.Hàm kiểm tra ngăn xếp rỗng
+ // return true if stack is full else false
+
+            bool isFull(){
+                if(i == SIZE - 1){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+
+### 1.3.Hàm thêm một khối vào ngăn xếp
+// to insert an elememt into the stack
+
+            void push(uint8_t stack[], uint8_t value){
+                if(isFull() == true){
+                    printf("stack is full\n");
+                }
+                else{
+                    ++i;
+                    stack[i] = value;
+                }
+            }
+### 1.4.Hàm xóa một khối khỏi ngăn xếp
+// to remove an element from the stack
+
+        void pop(uint8_t stack[]){
+            if(isEmpty() == true){
+                printf("stack is empty\n");
+            }
+            else {
+                stack[i--] =='\0';
+            }
+        }
+### 1.6.Hàm trả về một khối cảu ngăn xếp     
+// return the top element of the stack
+
+        uint8_t top (const uint8_t stack[]){
+            return stack[i];
+        }
+### 1.7.Hàm trả về kích thước của ngăn xếp       
+// return the size of the stack
+        uint8_t size(){
+            return i + 1;
+        }
