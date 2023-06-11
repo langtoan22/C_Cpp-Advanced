@@ -37,6 +37,8 @@ void sortList (uint8_t arr[]){
         }
     }
 }
+
+//ham tim kiem nhi phan
 bool binarySearch (uint8_t arr[], uint8_t x){
     uint8_t left = 0; uint8_t right = SIZE - 1;
 
