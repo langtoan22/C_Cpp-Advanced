@@ -12,7 +12,7 @@ typedef struct{
 
 // queueInit(): hàm tạo queue
     void QueueInit (Queue *queue){
-        queue -> rear = 0;
+        queue -> rear = -1;
         queue -> front = 0;
     }
 
@@ -22,8 +22,8 @@ typedef struct{
     }
 
 // dequeue(): This operation removes and returns an element that is at the front end of the queue.
-    void dequeue (Queue *queue, uint8_t value){
-       queue -> array[(queue -> front) ++];
+    uint8_t dequeue (Queue *queue){
+       return queue -> array[(queue -> front) ++];
     }
 // front(): This operation returns the element at the front end without removing it.
 // trả vê giá trị
@@ -38,7 +38,7 @@ typedef struct{
     }
 // isEmpty(): This operation indicates whether the queue is empty or not.
     bool isempty(Queue *queue) {
-         if( queue -> front == -1 && queue -> rear == -1){
+         if( queue -> front == 0 && queue -> rear == -1 || front > rear){
             return true;
          }
         else return false;
@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
     Queue queue;
     QueueInit(&queue);
 
-//them mot phan tu
+//them phan tu
     enqueue(&queue, 3);
     enqueue(&queue, 2);
     enqueue(&queue, 5);
@@ -73,12 +73,18 @@ int main(int argc, char const *argv[])
     for (uint8_t i = queue.front; i <= queue.rear; i++){
         printf("%d ", queue.array[i]);
     }
-    printf("\n%d\n", queue.front);
-    printf("%d\n", queue.rear);
+
+    dequeue(&queue);
+    dequeue(&queue);
+
+
+    printf("\ndia chi front:%d\n", queue.front);
+    printf("dia chi rear: %d\n", queue.rear);
   
 
-    printf("Phần tử đầu tiên trong hàng đợi là: %d\n", front(&queue));
-    printf("Phần tử cuối cùng trong hàng đợi là: %d\n", rear(&queue));
-    printf("kichthuoc: %d \n", size(&queue));
+    printf("giá trị đầu tiên trong hàng đợi là: %d\n", front(&queue));
+    printf("giá trị cuối cùng trong hàng đợi là: %d\n", rear(&queue));
+
+    printf("kich thước hàng đợi: %d \n", size(&queue));
     return 0;
 }
