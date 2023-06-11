@@ -63,17 +63,17 @@ int main(int argc, char const *argv[])
     QueueInit(&queue);
 
 //them mot phan tu
-    enqueue(&queue, 1);
-    enqueue(&queue, 2);
     enqueue(&queue, 3);
-    enqueue(&queue, 4);
+    enqueue(&queue, 2);
     enqueue(&queue, 5);
+    enqueue(&queue, 4);
+    enqueue(&queue, 1);
 
 // in ra gia tri trong hang doi
     for (uint8_t i = queue.front; i <= queue.rear; i++){
         printf("%d ", queue.array[i]);
     }
-    printf("%d\n", queue.front);
+    printf("\n%d\n", queue.front);
     printf("%d\n", queue.rear);
   
 
