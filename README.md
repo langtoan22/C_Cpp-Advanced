@@ -46,7 +46,7 @@
 
         value(leybel): được khởi tạo với một giá trị
 
-        ifdef(if not define): kiểm tra value được định nghĩa hay chưa
+        ifndef(if not define): kiểm tra value được định nghĩa hay chưa
 
     #endif  (đóng)
 
@@ -112,13 +112,17 @@ Sử dụng thư viện **stdint.h** để dùng các kiểu dữ liêu uint_t (
 
 - Biến cục bộ bình thường: sau khi gọi thì biến khởi tạo giá trị biến và sẽ thu hồi địa chỉ trên bộ nhớ Ram khi chương trình kết thúc khỏi biến đó, lần thứ hai gọi biến thì chương trình sẽ khởi tạo lại giá trị biến từ đầu và có thể giống hoặc không địa chỉ trên bộ nhớ so với lần gọi đầu.
 
-    vidu: uint8_t temp = 0;
+**vidu:**      
+
+            uint8_t temp = 0;
             printf("temp: %d\n", temp);
             temp++;
 
 - Biến cục bộ dùng static: khi gọi thì biến khởi tạo giá trị chỉ một lần và cố định địa chỉ giá trị đó tồn tại hết vòng đời của chương trình(sau khi kết thúc thì mới thu hồi lại địa chỉ trên bộ nhớ Ram), và lần gọi thứ hai của biến thì giá trị sẽ được tiếp tục.
 
-    vidu:   static uint8_t temp = 0;
+**vidu:**   
+
+            static uint8_t temp = 0;
             printf("temp: %d\n", temp);
             temp++;
 
@@ -147,11 +151,9 @@ Sử dụng thư viện **stdint.h** để dùng các kiểu dữ liêu uint_t (
 
 
 **vidu**: int a = 5; a++;
-          
-    
-          RAM(a=5) -> Register(a=5 và phép toán) -> ALU(thực hiện a++ =6)
-                                                    
-          RAM(nhận kết quả từ Register) <- Register(nhận kết quả từ ALU) <-
+
+![](https://github.com/langtoan22/image_C_Cpp_Advanced/blob/main/bai4_Register1.png?raw=true)
+      
 
 - vì Register có bộ nhớ giới hạn nên chỉ ưu tiên dùng Register cho những biến cần tốc độ xử lý cao, còn lại tất cả được lưu trên RAM.
 
@@ -626,7 +628,7 @@ Các member trong Union đều dùng chung một địa chỉ nên khi thay đ�
         return 0;
     }
 
-# BAI 10: LINK LIST
+# BAI10_LINK LIST
 ## 1. TỔNG QUÁT VỀ LINKLIST(10_1_LinkList.c)
 Tạo mảng nhân tạo có đặc trưng giống mảng truyền thống nhưng nó có thể chèn hoặc bớt ngẫu nhiên các phần tử vào mảng.
 
@@ -803,6 +805,25 @@ Ngăn xếp (STACK) là một danh sách tuyến tính, trong đó cho phép th�
         }
 ### 1.7.Hàm trả về kích thước của ngăn xếp       
 // return the size of the stack
+
         uint8_t size(){
             return i + 1;
         }
+
+# BAI12_QUEUE(HÀNG ĐỢI)
+## 1.Tổng quan
+Hàng đợi là một danh sách tuyến tính trong đó, phép bổ sung một phần tử vào hàng đợi được thực hiện ở một đầu, gọi là cuối hàng(rear) và phép loại bỏ một phần tử được thực hiện ở đầu kia, gọi là đầu hàng(front).
+
+Cơ cấu của hàng đợi là vào ở một đầu, ra ở một đầu, phần tử vào trước thì ra trước, phầm tử vào sau thì ra sau.
+
+Hàng đợi còn được gọi là danh sách kiểu FIFO(First In First Out)
+
+![](https://github.com/langtoan22/image_C_Cpp_Advanced/blob/main/bai12_queue.png?raw=true)
+
+- quy ước: 
+
+        rear = -1
+        front = -1
+
+- biến thể của queue: 
+    + có hai trường hợp queue rỗng: front = rear = -1(khi chưa gán data), rear = front(khi lấy hết data)
