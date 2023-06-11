@@ -16,9 +16,22 @@ typedef struct{
         queue -> front = 0;
     }
 
+// isFull(): This operation indicates whether the queue is full or not.
+    bool isfull (Queue *queue){
+        if(queue->rear == SIZE - 1){
+            return true;
+        }
+        else return false;
+    }
+    
 // enqueue(): Inserts an element at the end of the queue i.e. at the rear end.
-    void enqueue (Queue *queue, uint8_t value){
+    void enqueue (Queue *queue, uint8_t value){ 
+        if(isfull(queue) == true){
+            printf("queue is full\n");
+        }
+        else{
         queue -> array[++(queue -> rear)] = value;
+        }
     }
 
 // dequeue(): This operation removes and returns an element that is at the front end of the queue.
@@ -44,13 +57,7 @@ typedef struct{
         else return false;
          }
 
-// isFull(): This operation indicates whether the queue is full or not.
-    bool isfull (Queue *queue){
-        if(queue->rear == SIZE - 1){
-            return true;
-        }
-        else return false;
-    }
+
 
 // size(): This operation returns the size of the queue i.e. the total number of elements it contains
     uint8_t size (Queue *queue){

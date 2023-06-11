@@ -75,6 +75,7 @@ int main() {
     }
     printf("\n");
 
+    //tim kiem
     while(1){
         printf("nhap gia tri x can tim: ");
         scanf("%d", &x);
