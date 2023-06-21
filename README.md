@@ -827,3 +827,254 @@ Hàng đợi còn được gọi là danh sách kiểu FIFO(First In First Out)
 
 - biến thể của queue: 
     + có hai trường hợp queue rỗng: front = rear = -1(khi chưa gán data), rear = front(khi lấy hết data)
+
+# BAI13_CÂY NHỊ PHÂN
+
+# BÀI14_CLASS
+### 1. CLASS
+
+Class gồm 2 phần: 
+- Thuộc tính(attribue/property);
+- hương thức(method, behavior). 
+
+là các trường dữ liệu mô tả thuộc tính và hành động của lớp
+
+Class thực chất là một kiểu dữ liệu do người lập trình định nghĩa
+
+Object(đối tượng): là một thực thể của Class
+
+
+**vidu:** Class connguoi bao gồm: 
+- Các thuộc tính: tên, tuổi, địa chỉ, ngày sinh, ...
+- Các hành động: đi lại, ăn, ngủ...
+khi đó Object là một người cụ thể nào đó.
+### 1.KHAI BÁO MỘT CLASS 
+
+        class tênclass{
+            public: method();
+            private: property
+        };
+            void tênclass :: method(){
+            };
+        int main
+            tenclass object;
+            object.method();
+
+
+### 2.Phạm vi truy cập của class (Acess modifier)
+
+- public: object có thể truy cập đến được
+- private: chỉ có thể truy cập trong class đó;
+- protected: cho phép các class con có thể truy cập đến và sửa được; các phương thức và thuộc tính chỉ có thể truy cập qua các class kế thừa nó hoặc chính nó
+### 3.Method declaration
+Phương thức cũng giống như một hàm bình thường.
+
+Đối với phương thức thì có hai cách định nghĩa thi hành: định nghĩa thi hành trong
+lúc định nghĩa class và định nghĩa thi hành bên ngoài class.
+### 4. Hàm dựng
+
+Constructor(hàm khởi tạo): một hàm được khởi tạo khi khai báo một thực thể mới(object), nó có cùng tên với tên Class và không có kiểu trả về.
+
+Destructor(hàm huỷ): nó có cùng tên với tên Class và không có kiểu trả về. nhưng có dấu ~ trước hàm
+
+### 5.Static member
+
+Static member hay thành viên tĩnh trong class C++ cũng tương tự như với static variable (biến tĩnh) trong function 
+
+Đối với class, thành viên tĩnh sẽ là thuộc tính dùng chung cho tất cả các đối tượng của class đó, cho dù là không có đối tượng nào tồn tại. Tức là bạn có thể khai báo nhiều object, mỗi object các thuộc tính của nó đều khác nhau nhưng riêng static thì chỉ có một và static member tồn tại trong suốt chương trình cho dù có hay không có object nào của nó hay nói ngắn gọn là dùng chung một biến static
+
+các object đều dùng chung một địa chỉ khi trỏ đến một property sau khi khai báo 1 static .
+
+**vidu**:
+
+        class tênclass{
+                    public: method();
+                    private: property
+                    static int mssv
+                };
+                    int tênclass :: mssv;
+
+                    void tênclass :: method(){
+                    };
+                int main
+                    tenclass object;
+                    object.method();
+
+
+vidu về một class hoàn chỉnh: 
+
+        #include <iostream>
+        #include <string>
+        using namespace std ;
+
+        class sinhvien{
+            public://pham vi truy cap
+                void setthongtin();
+                void hienthi(); //method
+
+            private: 
+                int tuoi;// property
+                int lop;
+                string ten;
+        };
+
+            void sinhvien::setthongtin(){
+                    cout << "nhap vao ten:\n";
+                    cin >> ten;
+            }
+
+            void sinhvien::hienthi(){
+                cout <<"ten:" << ten <<"\n";
+            }
+
+        int main(int argc, char const *argv[])
+        {
+            sinhvien sv1; //Oject thuoc class sinh vien
+
+            sv1.setthongtin();
+            sv1.hienthi();
+
+            return 0;
+        }
+
+# BÀI15_OOP
+ ## 1. OOP
+
+- Object-oriented programming(OOP): xoay quang các đối tượng, dữ liệu thay vì xoay quành các hàm và thủ tục
+- Cố gắng mô phỏng các đối tượng trong thực tế thành các đối tượng trong ngôn ngữ lập trình thông qua các trường dữ liệu (data field) thuộc tính (attributes) và các hành động(behavior)
+
+ ví dụ; con người có các thuộc tính tên tuổi, địa chỉ và các hành  động đi đứng ngồi ...
+ - OOP tập chung vào các đối tượng thay vì logic phù hợp với các chương trình lớn và hay active, bảo trì...
+ - Điểm mạnh của OOP: có khả năng tái sự dụng lại code(code reusability), mở rộng(scalability), và hiệu quả(efficiency).
+
+## 2.CÁC TÍNH CHẤT CỦA OOP
+
+### 2.1.TÍNH KẾ THỪA(Inheritance)
+
+- Đặc tính này cho phép xây dựng một lớp mới có
+thể có sẵn các đặc tính mà các lớp khác đã có
+thông qua kế thừa.
+- Điều này cho phép các lớp chia sẻ hay mở rộng các
+đặc tính sẵn có mà không phải tiến hành định nghĩa
+lại
+
+#### 2.1.1.XÂY DỰNG KẾ THỪA
+
+        class <tenClass2>:<phạm vi kế thừa> <tenClass1>
+        {
+        //Nội dung lớp dẫn xuất
+        };
+
+Khi tenClass1 để phạm vi truy cập của property là private thì tenClass2 không kế thừa được
+
+vidu: 
+
+            class tenClass1{
+                public: method();
+                        property
+            };
+            void tenClass1 :: method(){
+                
+            };
+        
+
+        //tenclass2 kế thừa toàn bộ property và method của tenClass1
+
+            class tenClass2 : public tenClass1{
+                //định nghĩa mới của class con
+            };
+            void tenClass2 :: method(){
+                ghi đè định nghĩa mới dựa trên class cha
+            }
+            
+
+#### 2.1.2. PHẠM VI KẾ THỪA (Acess mode)
+
+- **Public**: Khi đó phạm vi truy cập(acess modifier) của class con sẽ giống của class cha.
+
+- **Private**: khi đó tất cả các property và method của class cha sẽ có phạm vi truy cập( acess modifier) là private ở class con, khi đó các đối tượng (object) sẽ không truy cập được vào các thông tin(property và method) của class cha mà class con đã kế thừa thay và chỉ truy cập được vào các thông tin mà class con đã định nghĩa.
+- **protected**: khi đó tất cả thông tin( property và method) của class cha khi để phạm vi truy cập( acess modifier) là pubic thì class con sẽ là protected.
+
+
+**vidu:** 
+
+        #include <iostream>
+        #include <string>
+
+        using namespace std;
+        class DoiTuong{
+            public:
+                string ten;
+            
+                void NhapThongTin(string ten);
+                void HienThi();
+        };
+
+            void DoiTuong :: NhapThongTin(string ten, int tuoi, int lop){
+                DoiTuong :: ten = ten;
+            }
+
+            void  DoiTuong ::HienThi(){
+                cout << "day la class DoiTuong:\n";
+                cout <<"ten: " <<ten<<endl;
+            }
+
+        //class SinhVien kế thừa class DoiTuong
+        class SinhVien :public DoiTuong{
+                
+        };
+
+        int main(int argc, char const *argv[])
+        {
+            SinhVien sv1;
+
+            sv1.NhapThongTin("Hoang", 17, 11);
+            sv1.HienThi();
+            return 0;
+        }
+
+####  GHI ĐÈ (overridding)
+
+Khi class con muốn thêm property và sử dụng lại method của class cha.
+khi đó class con định nghĩa lại method khi cần thêm các property;
+
+### 2.2. TÍNH ĐA HÌNH(polymorphism)
+- các method trong class sẽ phân biệt dựa vào các input parameter.
+
+### 2.3.TEMPLATE
+- Template (khuôn mẫu) là một từ khóa trong C++, và là một kiểu dữ liệu trừu tượng tổng quát hóa cho các kiểu dữ liệu int, float, double, bool...
+- Template trong C++ có 2 loại đó là function template & class template.
+- Template giúp người lập trình định nghĩa tổng quát cho hàm và lớp thay vì phải nạp chồng (overloading) cho từng hàm hay phương thức với những kiểu dữ liệu khác nhau.
+
+### 2.4. TÍNH TRỪU TƯỢNG(Abstraction)
+- trong lập trình hướng đối tượng là một khả năng mà chương trình có thể bỏ qua sự phức tạp bằng cách tập trung vào cốt lõi của thông tin cần xử lý.
+- Điều đó có nghĩa, bạn có thể xử lý một đối tượng bằng cách gọi tên một phương thức và thu về kết quả xử lý, mà không cần biết làm cách nào đối tượng đó được các thao tác trong class.
+- Ví dụ đơn giản, bạn có thể nấu cơm bằng nồi cơm điện bằng cách rất đơn giản là ấn công tắc nấu, mà không cần biết là bên trong cái nồi cơm điện đó đã làm thế nào mà gạo có thể nấu thành cơm
+
+###  2.5.TÍNH ĐÓNG GÓI(Encapsulation)
+- Khi khai báo property thì phải khai báo ở phạm vi truy cập(acess modifier) là private hoặc protected không được phép khai báo ở public, phòng trường hợp người dùng truy cập trực tiếp và thay đổi giá trị dẫn đến sai chương trình.
+
+# BÀI16
+
+### 1.namespace
+
+Định nghĩa vùng nhớ, mỗi namespace sẽ định nghĩa vùng nhớ riêng biệt hay con gọi thư viện riêng, cho phép đặt tên hai biến, class, mảng... trùng tên với nhau trong 2 thư viện khác nhau.
+
+**using namspace**: gọi một thư viện được khai báo trước đó 
+
+### 2.virtual fuction 
+
+Còn được gọi là hàm ảo, khi các phương thức của classs cha dùng virtual thì class con kế thừa sẽ load lại phương thức và hiển thị phương thức đã được định nghĩa và ghi đè
+
+class con khi kế thừa và ghi đè thì vẫn trên phân vùng địa chỉ của class cha, nên khi không dùng virtual thì khi gọi các phương thức đã được định nghĩa và ghi đè mới của class con thì sẽ hiện các phương thức của class cha.
+
+### 3.string
+
+### 4.vector
+
+vector giống như mảng động(linklist) chỉ khác vector có các địa chỉ liền kề 
+
+
+
+
+# BÀI17_LIST
