@@ -1063,18 +1063,59 @@ khi đó class con định nghĩa lại method khi cần thêm các property;
 **using namspace**: gọi một thư viện được khai báo trước đó 
 
 ### 2.virtual fuction 
+Chỉ dùng trong class
 
 Còn được gọi là hàm ảo, khi các phương thức của classs cha dùng virtual thì class con kế thừa sẽ load lại phương thức và hiển thị phương thức đã được định nghĩa và ghi đè
 
 class con khi kế thừa và ghi đè thì vẫn trên phân vùng địa chỉ của class cha, nên khi không dùng virtual thì khi gọi các phương thức đã được định nghĩa và ghi đè mới của class con thì sẽ hiện các phương thức của class cha.
 
 ### 3.string
-
+Sử dụng thư viện: include< string>
 ### 4.vector
 
-vector giống như mảng động(linklist) chỉ khác vector có các địa chỉ liền kề 
+Sử dụng thư viện: include< vector>
 
+vector giống như mảng động(linklist) có thể thay đổi được kích thước tuy nhiên các địa chỉ trong vector là liền kề nhau.
 
+Cú pháp: vector <kiểu dữ liệu> ten_vector
 
+Các hàm vector: 
+- Thêm phần tử: ten_vector.**push_back()**;
+    >array.push_back(5);
+- Xóa phần tử cuối: ten_vector.**pop_back()**;
+- Chèn phần tử: ten_vector.**insert(array.begin()+giá trị địa chỉ dịch chuyển tính từ vị trí đầu,giá trị phần tử cần chèn)**
+    >array.insert(array.begin()+2, 8);
+- Tạo một mảng gồm các phần tử cùng giá trị: ten_vector. **assign(số lượng phần tử, giá trị phần tử)**; ví dụ tạo 4 phần tử có giá trị là 3
+    >array.assign(4,3);
+- kích thước vector: ten_vector.**size()**;
 
-# BÀI17_LIST
+kĩ thuật duyệt( for cải tiến) qua các phần tử: 
+- for(datatype ten_bien : ten_vector){
+    printf("%d\n", ten_bien);
+}
+
+Các địa chỉ trong vector sẽ được gán cho ten_bien và in ra cho đến hết các phần tử trong vector.
+
+# BÀI17_LIST_MAP
+
+### 1.list
+Sử dụng thư viện: include< list >
+
+list giống vector về các hàm, nhưng khác về cách hoạt động, phần vùng địa chỉ vì địa chỉ của list không phải là các giá trị liền kề nhau.
+### 2.map
+
+Trong c++ có kiểu dữ liệu **auto**: là kiểu dữ liệu mà căn cứ vào giá trị đằng sau để tự động chọn kiểu dữ liệu phù hợp
+>auto 100; // tự động chọn kiểu dữ liệu int
+
+Sử dụng thư viện: include< map >;
+
+Map lưu các cặp key-value, các phần tử trong map sẽ là các cặp key-value. các key sẽ phải là duy nhất và value có thể lặp lại được.
+
+Cú pháp: **map <kiểu dữ liệu 1, kiểu dữ liệu 2> ten_map;**
+- kiểu dữ liệu 1 thể hiện **key**, kiểu dữ liệu 2 thể hiện **value**.
+
+có 3 phương thức chính: 
+- Thêm 1 cặp key-value;
+- Truy suất một giá trị thông qua key;
+- Xóa một cặp key-value khỏi map;
+
