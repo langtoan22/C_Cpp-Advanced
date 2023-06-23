@@ -32,16 +32,17 @@ class sinhvien{
         float getDiemTrungBinh();
 
         void HienThi();
-        
-        void setDiem(float toan, float ly, float hoa);
+
+        void ThayDoiDiem(string ten, float toan, float ly, float hoa);
 };
 
 // constructor
-    sinhvien::sinhvien(string ten, float toan, float ly, float hoa){
+   sinhvien::sinhvien(string ten, float toan, float ly, float hoa){
         TEN = ten;
         TOAN = toan;
         LY = ly;
         HOA = hoa;
+        DIEM_TRUNG_BINH = (TOAN + LY + HOA)/3;
     }
 
     void sinhvien :: setTen(string ten){
@@ -73,11 +74,11 @@ class sinhvien{
     }
 
     float sinhvien :: getDiemTrungBinh(){
-        return  (TOAN + LY + HOA)/3;
+        return  DIEM_TRUNG_BINH;
     }
 
     void sinhvien :: HienThi(){
-        cout << "Thong tin sinh vien:"<< endl;
+        cout << "\nThong tin sinh vien:"<< endl;
         cout << "Ten: " << getTen() << endl;
         cout << "Diem Toan: " << getToan() << endl;
         cout << "Diem Ly: " << getLy() <<endl;
@@ -85,17 +86,44 @@ class sinhvien{
         cout << "Diem trung binh: " << getDiemTrungBinh() << endl;
     }
 
-    void sinhvien :: setDiem(float toan, float ly, float hoa){
-        TOAN = toan;
-        LY = ly;
-        HOA = hoa;
+    void sinhvien :: ThayDoiDiem(string ten, float toan, float ly, float hoa){
+    // Nhap lai thong tin can thay doi
+        cout << "\nNhap thong tin can thay doi: " << endl;
+        cout << "Nhap ten sinh vien: ";
+        cin >> ten;
+        do {
+            cout << "Nhap diem Toan moi: ";
+            cin >> toan;
+            cout << "Nhap diem Ly moi: ";
+            cin >> ly;
+            cout << "Nhap diem Hoa moi: ";
+            cin >> hoa;
+            if (toan < 0 || toan > 10 || ly < 0 || ly > 10 || hoa < 0 || hoa > 10) {
+                cout << "Diem khong hop le. Vui long nhap lai.\n";
+            }
+        } while (toan < 0 || toan > 10 || ly < 0 || ly > 10 || hoa < 0 || hoa > 10);
+        
+        setTen(ten);
+        setToan(ly);
+        setLy(ly);
+        setHoa(hoa);
+
+    //cap nhat lai diem trung binh
+        getDiemTrungBinh();
+
+    //hien thi thong tin sau khi cap nhat
+        HienThi();
+
     }
 int main(int argc, char const *argv[])
 {
+    string ten;
     float toan, ly, hoa;
 
 // dat dieu kien diem
     do {
+        cout << "Nhap ten sinh vien: ";
+        cin >> ten;
         cout << "Nhap diem Toan: ";
         cin >> toan;
         cout << "Nhap diem Ly: ";
@@ -108,14 +136,11 @@ int main(int argc, char const *argv[])
     } while (toan < 0 || toan > 10 || ly < 0 || ly > 10 || hoa < 0 || hoa > 10);
 
 // tao doi tuong sinh vien vua nhap
-    sinhvien sv1("nguyen van a", toan, ly, hoa);
+    sinhvien sv1(ten, toan, ly, hoa);
     sv1.HienThi();
 
 // thay doi thong tin va cap nhat lai
-    sv1.setDiem(toan, ly, hoa);
-    sv1.getDiemTrungBinh();
-    sv1.HienThi();
-    // chua xong
+    sv1.ThayDoiDiem(ten, toan, ly, hoa);
 
 return 0;
 }
