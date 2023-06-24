@@ -833,6 +833,8 @@ Hàng đợi còn được gọi là danh sách kiểu FIFO(First In First Out)
 # BÀI14_CLASS
 ### 1. CLASS
 
+là một phần trong OOP, một địn nghĩa chung của các object.
+
 Class gồm 2 phần: 
 - Thuộc tính(attribue/property);
 - hương thức(method, behavior). 
@@ -899,7 +901,7 @@ các object đều dùng chung một địa chỉ khi trỏ đến một propert
                 int main
                     tenclass object;
                     object.method();
-
+// :: toán tử phạm vi
 
 vidu về một class hoàn chỉnh: 
 
@@ -938,6 +940,10 @@ vidu về một class hoàn chỉnh:
         }
 
 # BÀI15_OOP
+
+gồm 2 phần là class và object:
+- class là một định nghĩa chung của object;
+- object là một đối tượng chủ thể riêng biệt trong định nghĩa của class.
  ## 1. OOP
 
 - Object-oriented programming(OOP): xoay quang các đối tượng, dữ liệu thay vì xoay quành các hàm và thủ tục
