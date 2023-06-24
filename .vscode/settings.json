@@ -5,7 +5,8 @@
         "4.5_voulatile.C": "cpp",
         "4.5_volatile.C": "cpp",
         "setjmp.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "iostream": "cpp"
     },
     "markdown.trace.server": "verbose"
 }
