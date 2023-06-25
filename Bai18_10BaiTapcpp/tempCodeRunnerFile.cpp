@@ -1,1 +1,0 @@
-getArea
