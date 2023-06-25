@@ -1,12 +1,13 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
 using namespace std;
 
 class hcn{
     private:
-        int CHIEUDAI;
-        int CHIEURONG;
+        int CHIEU_DAI;
+        int CHIEU_RONG;
 
     public:
         hcn(int chieudai , int chieurong);
@@ -16,49 +17,50 @@ class hcn{
         void setchieuRong(int chieurong);
         int getchieuRong();
 
-        int TinhChuVi(int chieudai, int chieurong);
-        int TinhDienTich(int chieudai, int chieurong);
-        int TinhDuongCheo(int chieudai, int chieurong);
-        void KiemTraHinhVuong(int chieudai, int chieurong);
-        void HienThi(int chieudai, int chieurong);
+        int getChuVi();
+        int getDienTich();
+        float getDuongCheo();
+
+        void HienThi();
+        void KiemTraHinhVuong();
 
 };
 
     hcn :: hcn (int chieudai = 0, int chieurong = 0){
-        CHIEUDAI = chieudai;
-        CHIEURONG = chieurong;
+        CHIEU_DAI = chieudai;
+        CHIEU_RONG = chieurong;
     }
 
     void hcn :: setchieuDai (int chieudai){
-        CHIEUDAI = chieudai;
+        CHIEU_DAI = chieudai;
     }
 
     int hcn ::getchieuDai(){
-        return CHIEUDAI;
+        return CHIEU_DAI;
     }
 
     void hcn :: setchieuRong(int chieurong){
-        CHIEURONG = chieurong;
+        CHIEU_RONG = chieurong;
     }
 
     int hcn :: getchieuRong(){
-        return CHIEURONG;
+        return CHIEU_RONG;
     }
 
-    int hcn :: TinhChuVi(int chieudai, int chieurong){
-        return (chieudai + chieurong) *2; 
+    int hcn :: getChuVi(){
+        return (CHIEU_DAI + CHIEU_RONG)*2;
     }
 
-    int hcn :: TinhDienTich(int chieudai, int chieurong){
-        return chieudai * chieurong;
+    int hcn :: getDienTich(){
+        return (CHIEU_DAI * CHIEU_RONG);
     }
 
-    int hcn :: TinhDuongCheo(int chieudai, int chieurong){
-        return sqrt(pow(chieudai, 2) + pow(chieurong,2));
+    float hcn :: getDuongCheo(){
+        return sqrt(pow(CHIEU_DAI, 2) + pow(CHIEU_RONG, 2));
     }
 
-    void hcn :: KiemTraHinhVuong(int chieudai, int chieurong){
-        if(chieudai == chieurong){
+    void hcn :: KiemTraHinhVuong(){
+        if(CHIEU_DAI == CHIEU_RONG){
             cout << "la hinh vuong" << endl;
         }
         else{
@@ -66,32 +68,27 @@ class hcn{
         }
     }
 
-    void hcn :: HienThi (int chieudai, int chieurong){
-    cout << "Nhap chieu dai hinh chu nhat: ";
-    cin >> chieudai;
-    cout << "\nNhap chieu rong hinh chu nhat: ";
-    cin >> chieurong;
-    
-    cout << "\nChu vi hinh chu nhat la: ";
-    TinhChuVi(chieudai, chieurong);
+    void hcn :: HienThi (){
+   
+    cout << "\nChu vi hinh chu nhat la: " << getChuVi() << endl;
 
-    cout << "\nDien tich hinh chu nhat la: ";
-    TinhDienTich(chieudai, chieurong);
+    cout << "Dien tich hinh chu nhat la: " << getDienTich() << endl;
 
-    cout << "\nDo dai duong cheo hinh chu nhat la: " << endl;
-    TinhDuongCheo(chieudai, chieurong);
-
-
-    KiemTraHinhVuong(chieudai, chieurong);
+    cout << "Do dai duong cheo hinh chu nhat la: " <<setprecision(2) << fixed << getDuongCheo() << endl;
     }
+
 int main(int argc, char const *argv[])
 {
-    int chieudai = 0, chieurong = 0;
+    int chieudai, chieurong;
+
+    cout << "Nhap chieu dai hinh chu nhat: ";
+    cin >> chieudai;
+    cout << "Nhap chieu rong hinh chu nhat: ";
+    cin >> chieurong;
 
     hcn hcn1(chieudai, chieurong);
-    hcn1.HienThi(chieudai, chieurong);
-
-    // chua xong
+    hcn1.HienThi();
+    hcn1.KiemTraHinhVuong();
 
     return 0;
 }
