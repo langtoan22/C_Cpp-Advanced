@@ -75,6 +75,8 @@ class hcn{
     cout << "Dien tich hinh chu nhat la: " << getDienTich() << endl;
 
     cout << "Do dai duong cheo hinh chu nhat la: " <<setprecision(2) << fixed << getDuongCheo() << endl;
+    
+    KiemTraHinhVuong();
     }
 
 int main(int argc, char const *argv[])
@@ -88,7 +90,6 @@ int main(int argc, char const *argv[])
 
     hcn hcn1(chieudai, chieurong);
     hcn1.HienThi();
-    hcn1.KiemTraHinhVuong();
 
     return 0;
 }
