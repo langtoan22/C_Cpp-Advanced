@@ -8,5 +8,6 @@
         "stdio.h": "c",
         "iostream": "cpp"
     },
-    "markdown.trace.server": "verbose"
+    "markdown.trace.server": "verbose",
+    "C_Cpp.errorSquiggles": "enabled"
 }
