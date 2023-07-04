@@ -18,7 +18,7 @@ typedef enum{
 
 class SinhVien {
     private: 
-        uint8_t MSV;
+        uint16_t MSV;
         string TEN;
         int TUOI;
         typeGioiTinh GIOI_TINH;
@@ -30,7 +30,7 @@ class SinhVien {
     public: 
         SinhVien();
         SinhVien( string ten, int tuoi, typeGioiTinh gioitinh, double diemtoan, double diemly, double diemhoa);
-        uint8_t getMsv();
+        uint16_t getMsv();
         void setTen(string ten);
         string getTen();
         void setTuoi(int tuoi);
@@ -52,7 +52,7 @@ class SinhVien {
 
     SinhVien :: SinhVien( string ten, int tuoi, typeGioiTinh gioitinh, double diemtoan, double diemly, double diemhoa){
         
-        static uint8_t msv = 100;
+        static uint16_t msv = 100;
         msv ++;
         MSV = msv;
 
@@ -64,7 +64,7 @@ class SinhVien {
         DIEM_HOA = diemhoa;
         
     }
-    uint8_t SinhVien :: getMsv(){
+    uint16_t SinhVien :: getMsv(){
        
         return  MSV;
     }
@@ -125,6 +125,7 @@ class SinhVien {
 
     void SinhVien :: getThongTin(){
         cout << "Thong tin cua sinh vien: \n";
+        cout << "Ma sinh vien: "<< getMsv() << endl;;
         cout << "Ten: "<<getTen() << endl;
         cout << "Tuoi: "<< getTuoi() << endl;
         cout << "Gioi tinh: " << getGioiTinh() << endl;
@@ -143,6 +144,7 @@ class Menu{
         void XoaSinhVien();
         void TimKiemSinhVien();
         void SapXepSinhVienDTB();
+        void SapXepSinhVienTheoTen();
         void HienThiDanhSach();
 };
 
@@ -200,7 +202,7 @@ class Menu{
 // Cap nhat lai thong tin cua sinh vien bang msv
     void Menu :: CapNhatThongTin(){
 
-        uint8_t MSV;
+        uint16_t MSV;
         string TEN;
         int TUOI;
         typeGioiTinh GIOI_TINH;
@@ -264,7 +266,7 @@ class Menu{
 
             item.getThongTin();
 
-            break;
+            return;
             }  
         }
         cout << "Khong tim thay msv: " << MSV << endl;
@@ -281,7 +283,7 @@ class Menu{
             if(MSV == item->getMsv()){
                 item = Database.erase(item);
                 cout << " Da xoa sinh vien co msv vua nhap thanh cong!\n";
-                break;
+                return;
             }
         }
         cout << "Khong tim thay msv "<<MSV << endl;
@@ -295,7 +297,7 @@ class Menu{
         for(SinhVien item : Database){
             if(TEN == item.getTen()){
                 item.getThongTin();
-                break;
+                return;
             }
         }
         cout << "Khong tim thay ten:" << TEN <<endl; 
@@ -314,18 +316,21 @@ class Menu{
                     // hoa doi vi tri sinh vien
                     temp = *i;
                     *i = *j;
-                    *j = *i;
+                    *j = temp;
                 }
             }
         }
         // Hien thi danh sach sinh vien sau khi sap xep
+        cout << "Danh sach sinh vien sau khi sap xep DTB:\n " ;
         for(i = Database.begin(); i != Database.end(); ++i){
-            cout << "Danh sach sinh vien sau khi sap xep DTB:\n " ; 
-            i->getThongTin();
+             i->getThongTin();
         }
     }
-// Sap xep sinh vien theo ten
 
+// Sap xep sinh vien theo ten
+    void Menu :: SapXepSinhVienTheoTen(){
+        
+    }
 // Hien thi danh sach sinh vien
     void Menu :: HienThiDanhSach(){
         cout << "Danh sach cac sinh vien: \n";
@@ -342,13 +347,14 @@ class Menu{
         for(int i = 0; i < SoLuongsv; i++){
             Menu1.ThemSinhVien();
         }
-        
-        Menu1.CapNhatThongTin();
+
+        Menu1.HienThiDanhSach();
+        //Menu1.CapNhatThongTin();
         //Menu1.XoaSinhVien();
         //Menu1.TimKiemSinhVien();
-        //Menu1.SapXepSinhVienDTB();
-        //Menu1.HienThiDanhSach();
-        
+        Menu1.SapXepSinhVienDTB();
+        Menu1.SapXepSinhVienTheoTen();
+         
         return 0;
     }
     
