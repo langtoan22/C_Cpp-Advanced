@@ -42,7 +42,7 @@ class sinhvien{
         TOAN = toan;
         LY = ly;
         HOA = hoa;
-        DIEM_TRUNG_BINH = (TOAN + LY + HOA)/3;
+        DIEM_TRUNG_BINH;
     }
 
     void sinhvien :: setTen(string ten){
@@ -74,7 +74,7 @@ class sinhvien{
     }
 
     float sinhvien :: getDiemTrungBinh(){
-        return  DIEM_TRUNG_BINH;
+        return  DIEM_TRUNG_BINH = (TOAN + LY + HOA)/3;
     }
 
     void sinhvien :: HienThi(){

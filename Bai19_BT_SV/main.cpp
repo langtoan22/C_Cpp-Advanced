@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <stdint.h>
+
 using namespace std;
 
 typedef enum{
@@ -27,6 +28,7 @@ class SinhVien {
         double DIEM_TRUNG_BINH;
         typeHocLuc HOC_LUC;
     public: 
+        SinhVien();
         SinhVien( string ten, int tuoi, typeGioiTinh gioitinh, double diemtoan, double diemly, double diemhoa);
         uint8_t getMsv();
         void setTen(string ten);
@@ -44,10 +46,13 @@ class SinhVien {
         typeHocLuc getHocLuc();
         void getThongTin();
 };
+    SinhVien :: SinhVien(){
+
+    }
 
     SinhVien :: SinhVien( string ten, int tuoi, typeGioiTinh gioitinh, double diemtoan, double diemly, double diemhoa){
         
-        static uint8_t msv = 0;
+        static uint8_t msv = 100;
         msv ++;
         MSV = msv;
 
@@ -119,9 +124,10 @@ class SinhVien {
     }
 
     void SinhVien :: getThongTin(){
+        cout << "Thong tin cua sinh vien: \n";
         cout << "Ten: "<<getTen() << endl;
         cout << "Tuoi: "<< getTuoi() << endl;
-        cout << " Gioi tinh: " << getGioiTinh() << endl;
+        cout << "Gioi tinh: " << getGioiTinh() << endl;
         cout << "Diem toan: " << getDiemToan() << endl;
         cout << "Diem ly: " << getDiemLy() << endl;
         cout << "Diem hoa: " << getDiemHoa() << endl;
@@ -133,10 +139,14 @@ class Menu{
         list <SinhVien> Database;
     public:
         void ThemSinhVien();
-        void CapNhat();
+        void CapNhatThongTin();
+        void XoaSinhVien();
+        void TimKiemSinhVien();
+        void SapXepSinhVienDTB();
+        void HienThiDanhSach();
 };
 
-
+// Them sinh vien vao danh sach
     void Menu :: ThemSinhVien(){
         string TEN;
         int TUOI;
@@ -145,45 +155,50 @@ class Menu{
         double DIEM_LY;
         double DIEM_HOA;
 
-    cout << "Nhap ten cua sinh vien: " << endl;
-    cin >> TEN;
-    cout << "Nhap tuoi cua sinh vien: "<< endl;
-    cin >> TUOI;
-    cout << "Nhap gioi tinh sinh vien: " << endl;
-    string gt;
-    cin >> gt;
-    if( gt =="NAM"){
-        GIOI_TINH = NAM;
-    }
-    else if (gt == "NU"){
-        GIOI_TINH = NU;
-    }
-    else {
-        cout << " Gioi tinh khong hop le" << endl;
-    }
+        cout << "Nhap thong tin cua sinh vien: \n";
+        cout << "Nhap ten cua sinh vien: ";
+        cin >> TEN;
+        cout << "Nhap tuoi cua sinh vien: ";
+        cin >> TUOI;
 
-    do
-    {
-        cout << "Nhap vao diem TOAN: "<< endl;
-        cin >> DIEM_TOAN;
-        cout << "Nhap vao diem LY: " << endl;
-        cin >> DIEM_LY;
-        cout << "Nhap vao diem HOA: " << endl;
-        cin >> DIEM_HOA;
-        if (DIEM_TOAN < 0 || DIEM_TOAN > 10 || DIEM_LY < 0 || DIEM_LY > 10 || DIEM_HOA < 0 || DIEM_HOA > 10){
-            cout << " Diem nhap vao khong hop le, vui long nhap lai!\n";
+        //Nhap gioi tinh cua sinh vien
+        cout << "Nhap gioi tinh sinh vien(NAM/NU): ";
+        string gt;
+        do {
+        cin >> gt;
+        if( gt =="NAM"){
+            GIOI_TINH = NAM;
         }
-    } while (DIEM_TOAN < 0 || DIEM_TOAN > 10 || DIEM_LY < 0 || DIEM_LY > 10 || DIEM_HOA < 0 || DIEM_HOA > 10);
+        else if (gt == "NU"){
+            GIOI_TINH = NU;
+        }
+        else{
+            cout << "Gioi tinh khong hop le, vui long nhap lai(NAM/NU)" << endl;
+        }
+        }while(gt != "NAM" && gt != "NU");
+        
+        // Nhap diem cua sinh vien
+        do
+        {
+            cout << "Nhap vao diem TOAN: ";
+            cin >> DIEM_TOAN;
+            cout << "Nhap vao diem LY: ";
+            cin >> DIEM_LY;
+            cout << "Nhap vao diem HOA: ";
+            cin >> DIEM_HOA;
+            if (DIEM_TOAN < 0 || DIEM_TOAN > 10 || DIEM_LY < 0 || DIEM_LY > 10 || DIEM_HOA < 0 || DIEM_HOA > 10){
+                cout << " Diem nhap vao khong hop le, vui long nhap lai!\n";
+            }
+        } while (DIEM_TOAN < 0 || DIEM_TOAN > 10 || DIEM_LY < 0 || DIEM_LY > 10 || DIEM_HOA < 0 || DIEM_HOA > 10);
 
-    
-        SinhVien sv (TEN, TUOI, GIOI_TINH, DIEM_TOAN, DIEM_LY, DIEM_HOA);
+        
+            SinhVien sv (TEN, TUOI, GIOI_TINH, DIEM_TOAN, DIEM_LY, DIEM_HOA);        
 
-        Database.insert(Database.begin(),sv);
+            Database.push_back(sv);
+        }   
 
-        Database.push_back(sv);
-    }   
-
-    void Menu :: CapNhat(){
+// Cap nhat lai thong tin cua sinh vien bang msv
+    void Menu :: CapNhatThongTin(){
 
         uint8_t MSV;
         string TEN;
@@ -193,7 +208,7 @@ class Menu{
         double DIEM_LY;
         double DIEM_HOA;
 
-        cout << "Nhap msv cua sinh vien" << endl;
+        cout << "Nhap msv cua sinh vien can cap nhat lai thong tin: ";
         cin >> MSV;
 
         for (SinhVien item : Database){
@@ -201,14 +216,20 @@ class Menu{
                 cout << "Thong tin sinh vien: " << endl;
                 item.getThongTin();
 
-                cout << "Nhap tong tin can cap nhat cho sinh vien: \n";
+                cout << "Nhap tong tin can cap nhat cua sinh vien: \n";
 
                 cout << "Nhap ten moi cua sinh vien: " << endl;
                 cin >> TEN;
+                item.setTen(TEN);
+
                 cout << "Nhap tuoi moi cua sinh vien: "<< endl;
                 cin >> TUOI;
-                cout << "Nhap gioi tinh moi sinh vien: " << endl;
+                item.setTuoi(TUOI);
+
+                // Nhap gioi tinh can cap nhat
                 string gt;
+                cout << "Nhap gioi tinh sinh vien(NAM/NU): " << endl;
+                do {
                 cin >> gt;
                 if( gt =="NAM"){
                     GIOI_TINH = NAM;
@@ -216,10 +237,12 @@ class Menu{
                 else if (gt == "NU"){
                     GIOI_TINH = NU;
                 }
-                else {
-                    cout << " Gioi tinh khong hop le" << endl;
+                else{
+                cout << "Gioi tinh khong hop le, vui long nhap lai(NAM/NU)" << endl;
                 }
+                }while(gt != "NAM" && gt != "NU");
 
+                // Nhap diem can cap nhat
                 do
                 {
                     cout << "Nhap vao diem TOAN moi: "<< endl;
@@ -232,23 +255,100 @@ class Menu{
                         cout << " Diem nhap vao khong hop le, vui long nhap lai!\n";
                     }
                 } while (DIEM_TOAN < 0 || DIEM_TOAN > 10 || DIEM_LY < 0 || DIEM_LY > 10 || DIEM_HOA < 0 || DIEM_HOA > 10);
+           
+            item.setTen(TEN);
+            item.setTuoi(TUOI);
+            item.setDiemToan(DIEM_TOAN);
+            item.setDiemLy(DIEM_LY);
+            item.setDiemHoa(DIEM_HOA);
 
+            item.getThongTin();
 
-            return item.getThongTin();
-
-                break;
-            }/* A */  
+            break;
+            }  
         }
-        cout << " Khong tim thay Msv!" << endl;
+        cout << "Khong tim thay msv: " << MSV << endl;
     }
 
+// Xoa sinh vien bang msv
+    void Menu :: XoaSinhVien(){
+        int MSV;
+        cout << "Nhap msv cua sinh vien can xoa: \n";
+        cin >> MSV;
+        
+        list <SinhVien> :: iterator item;
+        for(item = Database.begin(); item != Database.end(); ++item){
+            if(MSV == item->getMsv()){
+                item = Database.erase(item);
+                cout << " Da xoa sinh vien co msv vua nhap thanh cong!\n";
+                break;
+            }
+        }
+        cout << "Khong tim thay msv "<<MSV << endl;
+    }
+
+// Tim kiem sinh vien theo ten
+    void Menu :: TimKiemSinhVien(){
+        string TEN;
+        cout << "Nhap ten cua sinh vien can tim:\n ";
+        cin >> TEN;
+        for(SinhVien item : Database){
+            if(TEN == item.getTen()){
+                item.getThongTin();
+                break;
+            }
+        }
+        cout << "Khong tim thay ten:" << TEN <<endl; 
+    }
+
+// Sap xep sinh vien theo diemTB
+    void Menu :: SapXepSinhVienDTB(){
+
+        // khai bao iterator i va j luu dia chi cua cac sinh vien trong pham vi list sinh vien
+        list <SinhVien> :: iterator i, j;
+        SinhVien temp;
+
+        for(i = Database.begin() ; i != Database.end(); ++i ){
+            for(j = i; j != Database.end(); ++j){
+                if(i->getDiemTB() < j->getDiemTB()){
+                    // hoa doi vi tri sinh vien
+                    temp = *i;
+                    *i = *j;
+                    *j = *i;
+                }
+            }
+        }
+        // Hien thi danh sach sinh vien sau khi sap xep
+        for(i = Database.begin(); i != Database.end(); ++i){
+            cout << "Danh sach sinh vien sau khi sap xep DTB:\n " ; 
+            i->getThongTin();
+        }
+    }
+// Sap xep sinh vien theo ten
+
+// Hien thi danh sach sinh vien
+    void Menu :: HienThiDanhSach(){
+        cout << "Danh sach cac sinh vien: \n";
+        for(SinhVien item : Database){
+            item.getThongTin();
+        }
+    }
+    
     int main(int argc, char const *argv[])
     {
+        int SoLuongsv = 2;
+        Menu Menu1;
+
+        for(int i = 0; i < SoLuongsv; i++){
+            Menu1.ThemSinhVien();
+        }
         
-        Menu o;
-        o.ThemSinhVien();
-        o.CapNhat();
-        SinhVien sv("x", 24, NAM, 5, 7, 4);
+        Menu1.CapNhatThongTin();
+        //Menu1.XoaSinhVien();
+        //Menu1.TimKiemSinhVien();
+        //Menu1.SapXepSinhVienDTB();
+        //Menu1.HienThiDanhSach();
+        
         return 0;
     }
     
