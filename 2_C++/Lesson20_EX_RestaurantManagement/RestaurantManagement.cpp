@@ -109,14 +109,15 @@ class Manager {
     private:
         list <Dish> DATABASE_DISH;
         int NUMBER_OF_TABLE;
+    
+    public:
+        Manager();
         void addDish();
         void updateDish();
         void deleteDish();
         void listDish(bool fromMenu);
         void setNumberOfTable();
 
-    public:
-        Manager();
         int getNumberOfTable();
         list <Dish> getDatabaseDish();
         void menuManager();
@@ -160,13 +161,16 @@ list <Dish> Manager :: getDatabaseDish(){
 *Output: none
 */
 void Manager ::menuManager(){
+
     int choice;
+    do{
     cout << "Enter your choice\n";
     cout << "1. addDish\n";
     cout << "2. updateDish\n";
     cout << "3. deleteDish\n";
     cout << "4. listDish\n";
     cout << "5. setNumberOfTable\n";
+    cout << "0. return option\n";
 
     do{
         cin>> choice;
@@ -186,9 +190,13 @@ void Manager ::menuManager(){
             break;
         case 5: setNumberOfTable();
             break;
+        case 0: 
+            return;
         default:
             break;
         }
+    }while(true);
+
 }
 
 
@@ -208,7 +216,7 @@ void Manager :: addDish(){
     cout << "Enter dish information \n";
     cout << "Enter dish name\n ";
     cin >> name;
-    cout << "Enter dish price ";
+    cout << "Enter dish price\n";
     cin >> price;
     Dish dish(name, price);
     DATABASE_DISH.push_back(dish);
@@ -232,7 +240,6 @@ void Manager :: addDish(){
     }
 }
 
-
 /*
 *Method: updateDish
 *Description: This method update information of dish to menu
@@ -247,18 +254,17 @@ void Manager :: updateDish(){
 
     //display the dish list
     listDish(false);
-
-    do{
+    again:
         cout << "Enter dish ID to update\n";
         cin >> id;
 
-        for(Dish item : DATABASE_DISH){
+        for(Dish &item : DATABASE_DISH){
             if(id == item.getId()){
 
                 cout <<"Enter dish information to update\n";
                 cout << "Enter dish name\n";
                 cin >> name;
-                cout << "Enter dish price";
+                cout << "Enter dish price\n";
                 cin >> price;
 
                 item.setName(name);
@@ -274,16 +280,24 @@ void Manager :: updateDish(){
                 do{
                     cout << "Enter your choice\n";
                     cin >> choice;
+
+                switch (choice)
+                {
+                case 1: goto again;
+                    break;
+                case 0: 
+                    break;
+                default:
+                    break;
+                }
                 }while(choice < 0 || choice > 1);
-            }
-            if(choice == 1){
-                // return Enter dish ID to update
-                cout << "Enter dish ID to update";
+
+            return ;
             }
         }  
-    }while(choice == 1);
-    return;
+        cout << "Dish not found id: "<< id << endl;
 }
+
 
 
 /*
@@ -302,16 +316,16 @@ void Manager :: deleteDish(){
 
     //enter id to erase dish
 
+    again:
     cout << "Enter the dish id to erase\n";
     cin >> id;
     list <Dish> :: iterator item;
-
-    again:
 
     for(item = DATABASE_DISH.begin(); item != DATABASE_DISH.end(); ++item){
         if(id == item->getId()){
             item = DATABASE_DISH.erase(item);
             cout << "Successfully erased: \n";
+            listDish(false);
             do{
                 cout << "1. Continue erase\n";
                 cout << "0. return option\n";
@@ -327,9 +341,10 @@ void Manager :: deleteDish(){
                     break;
                 }
             }while(choice < 0 || choice > 1);
+            return ;
         }
     }
-        cout << "khong tim thay mon co ID: " << id << endl;
+        cout << "Dish not found id: "<< id << endl;
 }
 
 /*
@@ -405,6 +420,7 @@ class InformationOfTable{
         list <typeDish> DISH_IN_TABLE; 
 
     public:
+        InformationOfTable();
         InformationOfTable(int number_of_table, bool status);
         int getNumberOfTable();
         list <typeDish> getDishInTable();
@@ -425,6 +441,9 @@ class InformationOfTable{
 *   status: status of the table true or false
 *Output: none
 */
+InformationOfTable :: InformationOfTable(){
+
+}
 InformationOfTable :: InformationOfTable(int table_code, bool status){
     TABLE_CODE = table_code;
     STATUS = status;
@@ -694,7 +713,7 @@ Staff :: Staff(int number_of_table , list<Dish>database_dish){
             cout << "Staff do not have information, please transfer data to management! \n";
         }
 
-        // adđ table
+        // add table
         else{
             for(int i=1; i<=number_of_table; i++){
             InformationOfTable table(i, false);
@@ -707,7 +726,7 @@ Staff :: Staff(int number_of_table , list<Dish>database_dish){
     }
 
 /*
-*Mehotid: menuStaff
+*Method: menuStaff
 *Description: This method display options and chose option of the staff
 *Input:none
 *Output: none
@@ -717,7 +736,7 @@ void Staff :: menuStaff(){
     cout << "Enter id table to access\n";
     cin >> id_table;
     if(id_table < 1 || id_table > manager.getNumberOfTable()){
-        cout <<" There is no table with ID" << id_table << endl;
+        cout <<" There is no table with ID " << id_table << endl;
     }
     else{
         for(InformationOfTable table : DATABASE_TABLE){
@@ -726,74 +745,97 @@ void Staff :: menuStaff(){
                     item.DISH.getInformation(); cout << " Quantity: " << item.QUANTITY << endl;
                     
                 }
-                cout<<"--------------------------------------------------------------------------------"<<endl;
-                cout << "You chose the table with ID: " << id_table << endl;
-                cout << "1. Add Dish" << endl;
-                cout << "2. Update Dish" << endl;
-                cout << "3. Delete Dish" << endl;
-                cout << "4. List Dish" << endl;
-                cout << "5. Bill Payment" << endl;
-                cout << "0. Return Option" << endl;
-                cout << "Enter your choice ";
-                int choice;
-
                 do{
-                    cin >> choice;
-                    if(choice < 0 || choice > 5){
-                        cout << "Invalid choice please re -enter\n";
-                    }
+                    cout<<"--------------------------------------------------------------------------------"<<endl;
+                    cout << "You chose the table with ID: " << id_table << endl;
+                    cout << "1. Add Dish" << endl;
+                    cout << "2. Update Dish" << endl;
+                    cout << "3. Delete Dish" << endl;
+                    cout << "4. List Dish" << endl;
+                    cout << "5. Bill Payment" << endl;
+                    cout << "0. Return Option" << endl;
+                    cout << "Enter your choice ";
+                    int choice;
 
-                    switch (choice){
-                        case 1: table.addDish();
-                                
-                        case 2: table.updateDish();
-                                break;
-                        case 3: table.deleteDish();
-                                break;
-                        case 4: table.listDish(true);
-                                break;
-                        case 5: table.billPayment();
-                                break;
-                        case 0: 
-                                break;
-                        default:
-                                break;
-                                
-                    }
-                }while(choice < 0 || choice > 5);
+                    do{
+                        cin >> choice;
+                        if(choice < 0 || choice > 5){
+                            cout << "Invalid choice please re -enter\n";
+                        }
+
+                        switch (choice){
+                            case 1: table.addDish();
+                                    
+                            case 2: table.updateDish();
+                                    break;
+                            case 3: table.deleteDish();
+                                    break;
+                            case 4: table.listDish(true);
+                                    break;
+                            case 5: table.billPayment();
+                                    break;
+                            case 0: 
+                                    break;
+                            default:
+                                    break;
+                                    
+                        }
+                    }while(choice < 0 || choice > 5);
+                }while(true);
             }
         }
     }
 }
 
 /*
-*Function: MenuChoice
-*Description: This function call menu of manager and staff
+*Class: mainMenuRestaurant
+*Description: This class represents a basic implementation of a mainMenuRestaurant object.
+*/
+class mainMenuRestaurant {
+    private:
+        Manager manager;
+        Staff staff;
+    public: 
+
+        mainMenuRestaurant();
+        void menuChoice();
+};
+
+/*
+*Contructor: mainMenuRestaurant
+*Discription: This constructor initializes a new instance of the mainMenuRestaurant class.
+*Input: none
+*Output: none
+*/
+mainMenuRestaurant :: mainMenuRestaurant(){
+    manager = Manager();
+    staff = Staff();
+}
+/*
+*method: MenuChoice
+*Description: This method display main menu restaurant and chose menu reataurant
 *Input:
 manager: menu of manager
 staff: menu of staff
 *Output: none
 */
-void MenuChoice(Manager manager, Staff staff){
-    typedef enum
-    {
+void mainMenuRestaurant :: menuChoice (){
+        typedef enum{
         MANAGER = 1,
         STAFF = 2
-    } menu;
+        } menu;
 
-    while (true)
-    {
         int choice = 0;
-        do
-        {
+        do{
             cout << "===================================" << endl;
-            cout << "MENU" << endl;
+            cout << " MAIN MENU RESTAURANT" << endl;
             cout << "1. Manager" << endl;
             cout << "2. Staff" << endl;
             cout << "#. exit" << endl;
-            cout << "Enter your choice ";
+            cout << "Enter your choice \n";
+        do
+        {
             cin >> choice;
-            cout << "===================================" << endl;
             if (choice != 1 && choice != 2)
             {
                 cout << "Invalid choice please re -enter!\n";
@@ -801,24 +843,28 @@ void MenuChoice(Manager manager, Staff staff){
 
         } while (choice != 1 && choice != 2);
 
-        switch (choice)
+        switch ((menu)choice)
         {
-        case MANAGER:
-            cout << "Yout chose Manager!\n";
+            case 1:
+            cout << "You chose Manager!\n";
             manager.menuManager();
-            break;
-        case STAFF:
+                break;
+
+            case 2: 
             cout << "You chose Staff!\n";
             staff.menuStaff();
-            break;
+                break;
+
+            default:
+                break;
         }
-    }
+    }while(true);
 }
 
 int main(int argc, char const *argv[])
 {
-    Manager manager;
-    Staff staff;
-    MenuChoice(manager, staff);
+    mainMenuRestaurant menu;
+    menu.menuChoice();
+
     return 0;
 }
