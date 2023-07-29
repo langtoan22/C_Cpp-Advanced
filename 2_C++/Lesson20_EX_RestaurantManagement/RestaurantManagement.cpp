@@ -706,8 +706,8 @@ Staff :: Staff(){
 *Output: none
 */
 Staff :: Staff(int number_of_table , list<Dish>database_dish){
-     number_of_table = manager.getNumberOfTable();
-        database_dish = manager.getDatabaseDish();
+    number_of_table = manager.getNumberOfTable();
+    database_dish = manager.getDatabaseDish();
 
         if(number_of_table == 0 && database_dish.size() == 0){
             cout << "Staff do not have information, please transfer data to management! \n";
@@ -720,7 +720,7 @@ Staff :: Staff(int number_of_table , list<Dish>database_dish){
             DATABASE_TABLE.push_back(table);
         }
 
-        // coppy list mon tu class quan ly
+        // coppy list dish from class Manager
         DATABASE_DISH.assign(database_dish.begin(), database_dish.end());
         }
     }
@@ -736,7 +736,7 @@ void Staff :: menuStaff(){
     cout << "Enter id table to access\n";
     cin >> id_table;
     if(id_table < 1 || id_table > manager.getNumberOfTable()){
-        cout <<" There is no table with ID " << id_table << endl;
+        cout <<" There is no table with ID: " << id_table << endl;
     }
     else{
         for(InformationOfTable table : DATABASE_TABLE){

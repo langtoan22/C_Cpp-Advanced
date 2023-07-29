@@ -18,7 +18,7 @@ int main(int argc, char const *argv[])
         ptr[i] = 2*i;
     }
 
-    ptr = (uint8_t*) realloc(ptr, sizeof(uint8_t)*8); // mở thêm 3 byte từ 5 lên 8
+    ptr = (uint8_t*) realloc(ptr, sizeof(uint8_t)*8); // mở 8 byte 
    
    for (int i = 0; i < 8; i++){
         ptr[i] =  3*i;
