@@ -4,7 +4,7 @@
 
 
 // định nghĩa hàm liên kết
-cho tôi biết dấu * ở next, creaternode và 
+
 
 // hàm tạo node mới và cấp phát động với dữ liệu uint8_t là value
  node *createNode(uint8_t value){
