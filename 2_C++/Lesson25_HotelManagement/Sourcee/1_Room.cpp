@@ -2,10 +2,10 @@
 * File: Room.cpp
 * Author: Lang Van Toan
 * Date: 23/07/2023
-* Description: This is a Room file for program hotel management 
+* Description: This is a 1_Room source file for program hotel management 
 */
 
-#include "1_Room.h"
+#include "Room.h"
 #include <vector>
 
 /*

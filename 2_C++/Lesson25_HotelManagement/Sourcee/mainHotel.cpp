@@ -2,10 +2,12 @@
 * File: mainHotelManagement.cpp
 * Author: Lang Van Toan
 * Date: 23/07/2023
-* Description: This is a mainHotelManagement file for program hotel management 
+* Description: TThis is a HotelManagementn source file that contains all the prototypes to hotel management 
 */
 
-#include <HotelManagement.h>
+#include "HotelManagement.h"
+
+using namespace std;
 
 int main(int argc, char const *argv[])
 {

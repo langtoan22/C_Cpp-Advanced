@@ -2,9 +2,9 @@
 * File: 2_mainCustomer.cpp
 * Author: Lang Van Toan
 * Date: 23/07/2023
-* Description: This is a mainCustomer file for program hotel management 
+* Description: This is a mainCustomer source file for program hotel management 
 */
-#include "2_Customer.h"
+#include "Customer.h"
 
 
 int main(int argc, char const *argv[])

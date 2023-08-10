@@ -2,10 +2,10 @@
 * File: 2_Customer.cpp
 * Author: Lang Van Toan
 * Date: 23/07/2023
-* Description: This is a 2_Customer file for program hotel management 
+* Description: This is a 2_Customer source file for program hotel management 
 */
 
-#include "2_Customer.h"
+#include "Customer.h"
 
 /*
 * Class: Customer

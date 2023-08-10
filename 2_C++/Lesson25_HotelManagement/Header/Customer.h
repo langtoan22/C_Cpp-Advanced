@@ -2,7 +2,7 @@
 * File: Customer.h
 * Author: Lang Van Toan
 * Date: 23/07/2023
-* Description: This is a Customer file for program hotel management 
+* Description: This file is a Customer header file that for program hotel management 
 */
 
 #ifndef __CUSTOMER_H

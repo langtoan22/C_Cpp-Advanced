@@ -2,7 +2,7 @@
 * File: Employee.h
 * Author: Lang Van Toan
 * Date: 23/07/2023
-* Description: This is a Employee file for program hotel management 
+* Description: This file is a employee header file that for program hotel management 
 */
 
 #ifndef __EMPLOYEE_H
