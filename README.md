@@ -1102,7 +1102,7 @@ kĩ thuật duyệt( for cải tiến) qua các phần tử:
 
 Các địa chỉ trong vector sẽ được gán cho ten_bien và in ra cho đến hết các phần tử trong vector.
 
-# BÀI17_LIST_MAP
+# BÀI17_LIST_MAP_SET_MULTISET
 
 ### 1.list
 Sử dụng thư viện: include< list >
@@ -1125,7 +1125,36 @@ có 3 phương thức chính:
 - Truy suất một giá trị thông qua key;
 - Xóa một cặp key-value khỏi map;
 
+### 3.set
 
+#include <set> để dùng set
 
+set là một container mạnh mẽ trong thư viện std c++, set là cấu trúc dử liệu kiểu cây, các phần tử của set không nằm cạnh nhau trong ô nhớ và không có chỉ số nhưng có iterator và không thể dùng iterator để cộng trừ chỉ số để dịch sang trái sang phải như vector.
+
+Set có 2 tính chất: 
+
+- Mỗi phần tử trong set là duy nhất, tức không có 2 phần tử giống nhau tồn tại trong set;
+- Các phần tử trong set được sắp xếp theo thứ tự tăng dần về giá trị số và về thứ tự trong từ điển nếu là xâu kí tự. 
+
+Cú pháp: set <datatype> nameSet;
+
+- nameSet.insert(giá trị được thêm vào set);
+- nameSet.empty(); // kiểm tra rỗng
+- nameSet.clear(); // xóa các phần tử trong set
+
+Để duyệt set: 
+ for(int item : nameSet){
+    cout << item;
+ }
+
+ hoặc 
+ 
+ for( auto it = nameSet.begin(); it != nameSet.end(); ++ it){
+    cout << *it;
+ }
+
+ ### 4.multiset
+
+Multiset thì giống như set nhưng có thể lưu được các phần tử có giá trị giống nhau 
 # BÀI 23: Đa Luồng
 
