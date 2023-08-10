@@ -2,7 +2,7 @@
 * File: Room.cpp
 * Author: Lang Van Toan
 * Date: 23/07/2023
-* Description: This is a 1_Room source file for program hotel management 
+* Description: This file contains all the functions/methods to room management  
 */
 
 #include "Room.h"

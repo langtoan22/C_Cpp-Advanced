@@ -2,7 +2,7 @@
 * File: 2_mainCustomer.cpp
 * Author: Lang Van Toan
 * Date: 23/07/2023
-* Description: This is a mainCustomer source file for program hotel management 
+* Description: This is file to manage customer
 */
 #include "Customer.h"
 

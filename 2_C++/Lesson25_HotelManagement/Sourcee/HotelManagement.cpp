@@ -2,7 +2,7 @@
 * File: HotelManagement.cpp
 * Author: Lang Van Toan
 * Date: 23/07/2023
-* Description: This is a HotelManagementn source file that contains all the prototypes to hotel management 
+* Description: This file contains all the functions/methods to hotel management 
 */
 
 #include "HotelManagement.h"

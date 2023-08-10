@@ -2,7 +2,7 @@
 * File: 3_Employee.cpp
 * Author: Lang Van Toan
 * Date: 23/07/2023
-* Description: This is a 3_Employee source file for program hotel management 
+* Description: This file contains all the functions/methods to employee management  
 */
 
 #include "Employee.h"
