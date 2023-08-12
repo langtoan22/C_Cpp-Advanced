@@ -4,7 +4,11 @@
 
 
 // định nghĩa hàm liên kết
-
+struct Node {
+    uint8_t value;
+    struct Node *next;
+};
+typedef struct Node node;
 
 // hàm tạo node mới và cấp phát động với dữ liệu uint8_t là value
  node *createNode(uint8_t value){

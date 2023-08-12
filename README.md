@@ -79,11 +79,19 @@ vidu:
 
     void ten (int SoLuong_input,...)
     {
+        int sum = 0;
+        va_list sometext;  
+
+        va_start (sometext, SoLuong_input);
 
     for(int i = 0; i < SoLuong_input; i++)
     {
+        
         printf("hjksdf: %d\n", va_arg(va, int));
+        sum = sum + va_arg(sometext, int);
 
+        va_end(sometext);
+        return sum;
     }
 
     }
@@ -196,7 +204,9 @@ Trong bộ nhớ RAM sẽ có 5 phân vùng nhớ: text, data, bss, heap, stack
 - Chỉ có quyền Read và không có quyền sửa;
 - Chứa lệnh thực thi chương trình;
 - Hằng số sẽ được lưu ở phân vùng text (.rodata);
+
     **vidu**
+
         void main(void)  (.text)
         {
             int c;

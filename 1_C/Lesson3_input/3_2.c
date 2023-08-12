@@ -9,9 +9,11 @@ int tong(int so_input,...){                         //co the thay the kieu dư l
     va_start (va, so_input);                        //truy cap vao danh sach luu tru cac bien doi so, va cap nhat con tro
 
     for(int i = 0; i < so_input; i++){
-        //printf("test: %d\n",  va_arg(va, int));   //co the thay the kieu dư lieu
+
+        int num = va_arg(va, int);
+        printf("test: %d\n", num);   //co the thay the kieu dư lieu
                   
-         sum = sum + va_arg(va, int);               // va_arg(va, int): lay cac bien doi trong danh sach theo kieu dư lieu, va cap nhap vi tri con tro
+        sum = sum + num;               // va_arg(va, int): lay cac bien doi trong danh sach theo kieu dư lieu, va cap nhap vi tri con tro
         
     }
 
