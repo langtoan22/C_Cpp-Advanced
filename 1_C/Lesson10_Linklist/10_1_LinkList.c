@@ -3,75 +3,75 @@
 #include <stdlib.h>
 
 
-// định nghĩa hàm liên kết
+//khai bao cau truc cua 1 node
 struct Node {
     uint8_t value;
     struct Node *next;
 };
-typedef struct Node node;
+typedef struct Node NODE;
 
 // hàm tạo node mới và cấp phát động với dữ liệu uint8_t là value
- node *createNode(uint8_t value){
-    node *node2 = (node*) malloc(sizeof(node));
-    node2->value = value;
-    node2->next = NULL;
-    return node2;
+ NODE *createNode(uint8_t value){
+    NODE *newNode = (NODE*) malloc(sizeof(NODE));
+    newNode->value = value;
+    newNode->next = NULL;
+    return newNode;
  }
 
 // hàm duyệt 
-void duyet(node *array){
-   while(array != NULL){
-      printf("%d ", array -> value);
-      array = array -> next;
+void duyet(NODE* head){
+   while(head != NULL){
+      printf("%d, ", head -> value);
+      head = head -> next;
    }
 }
 
 //hàm thêm một node ở đầu DSLK
 
-void pushFront(node **array, uint8_t value){
-   node *newNode = createNode(value);
+void pushFront(NODE* *head, uint8_t value){
+   NODE *newNode = createNode(value);
 
-   if(*array == NULL){
-      *array = newNode;
+   if(*head == NULL){ // khi gia tri cua con tro ** head tức *head của con trỏ **head == null là không  trỏ đến địa chỉ của node nào trong danh sách
+      *head = newNode; // cập nhật con trỏ head trỏ vào địa chỉ của node mới
    }
    else{
-       newNode -> next = *array;
-      *array = newNode;
+       newNode -> next = *head;  //  con trỏ next của node mới sẽ trỏ đến node đằng sau                      
+      *head = newNode; // cập nhật con trỏ head trỏ vào địa chỉ của node mới 
    
    }
   
 }
+
 // hàm thêm 1 node ở cuối danh sách
-void push_back(node **array, uint8_t value){ 
-   node *temp, *p;
-   temp = createNode(value);
-   if(*array = NULL){ 
-      *array = temp;
+void push_back(NODE* *head, uint8_t value){ 
+   NODE *newNode = createNode(value);
+   NODE *temp  = *head;
+
+   if(*head == NULL){ 
+      *head = newNode; // *head là địa chỉ của node đầu tiên trong dslk
+      return;
    }
    else{
-      p = *array;
-      while(p->next != NULL){
-         p = p->next;
+      while (temp ->next != NULL){
+            temp = temp ->next;
       }
-      p->next = temp;
+      //cho next cua temp tro den newNode
+      temp -> next = newNode;
+    
    }
 }
+
  int main(int argc, char const *argv[])
  {
 
-   // node * array;  
-   // array = createNode(6);
-   node *array = NULL; // 0xc1
+   NODE *head = NULL; // 0xc1
 
-   // push_back(&array, 6);
-   // push_back(&array, 2);
-   // push_back(&array, 7);
+   for (int i = 1; i <= 10; i++){
+      //push_back(&head, i);
+      pushFront(&head, i);
+   }
 
-   pushFront(&array, 6);
-   pushFront(&array, 5);
-   pushFront(&array, 3);
-
-   duyet(array);
+   duyet(head);
    
      
       

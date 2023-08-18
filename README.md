@@ -491,9 +491,9 @@ Các member trong Union đều dùng chung một địa chỉ nên khi thay đ�
     địa chỉ của biến a là giá trị của con trỏ:
 
         printf("địa chỉ của biến a là: %d", &a);
-        nó tương tự 
-        printf(" giá trị của con trỏ là ptr: %d", ptr);
-    giá trị của biến a giá trị mà con trỏ ptr đang quản lý hoặc trỏ đến hoặc toán tử giải tham chiếu (**the indirection * operator/dereferencing operator**)
+     
+    giá trị của biến a giá trị mà con    nó tương tự 
+        printf(" giá trị của con trỏ là ptr: %d", ptr);trỏ ptr đang quản lý hoặc trỏ đến hoặc toán tử giải tham chiếu (**the indirection * operator/dereferencing operator**)
 
         printf("giá trị của biến a: %d," a);
         tương tự
@@ -739,7 +739,7 @@ Trong khi array là một mảng tĩnh không thể thay đổi kích thước �
 
 Con trỏ lưu địa chỉ đầu tiên thì mảng lưu các địa chỉ liền kề
 
-    >void malloc(sizeof(kiểu dữ liệu )* kích thước cần cấp phát); 
+    >void malloc(sizeof(kiểu dữ liệu )* số lương ô nhớ cần cấp phát); 
 
 - malloc sẽ trả về hàm void nên cần phải ép kiểu;
 

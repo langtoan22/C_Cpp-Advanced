@@ -8,7 +8,7 @@ typedef struct Node {
 } Node;
 
 //them node va sap xep tu be den lon
-void add_node(Node **head, int value) {
+void add_node(Node* *head, int value) {
     Node *new_node = (Node *)malloc(sizeof(Node));
     new_node->data = value;
     new_node->next = NULL;
@@ -20,12 +20,16 @@ void add_node(Node **head, int value) {
     }
 
     Node *current = *head;
-    while (current->next != NULL && current->next->data < value) {
-        current = current->next;
+    
+   // tìm vị trí thích hợp cho newnode để có giá trị từ bé đến lớn
+   //con trỏ current đang trỏ đến node đằng sau, nếu như data < value thì newnode có value lớn hơn data của node sau nên vị trí này không hợp lệ 
+   
+    while (current->next != NULL && current->next->data < value) { // con trỏ next của node không trỏ vào null hoặc data của node đó nhớ hơn value của node mới
+        current = current->next; // đi trong danh sách đến khi điều kiện sai(khi node sau là cuối và data của node sau > value của newNode)
     }
 
-    new_node->next = current->next;
-    current->next = new_node;
+    new_node->next = current->next; // tạo liên kết cho newnode tới node tiếp theo của node mà con trỏ current đang trỏ tới
+    current->next = new_node; // cho con trỏ của current trỏ tới newnode
 }
 
 typedef struct CenterPoint {

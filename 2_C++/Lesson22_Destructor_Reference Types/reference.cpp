@@ -12,11 +12,13 @@ int main(int argc, char const *argv[])
     array.push_back(4);
 
     int i = 0;
+
+    // khi sử dụng tham chiếu(&) thì item = i 
     for(int &item : array){
         item = i;
         i++;
     }
-    // khi sử dụng tham chiếu(&) thì item = i 
+    
     for(int item : array){
         cout << item<< endl;
     }
