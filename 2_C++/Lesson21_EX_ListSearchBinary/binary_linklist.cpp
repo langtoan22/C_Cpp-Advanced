@@ -27,7 +27,7 @@ void add_node(Node* *head, int value) {
     while (current->next != NULL && current->next->data < value) { // con trỏ next của node không trỏ vào null hoặc data của node đó nhớ hơn value của node mới
         current = current->next; // đi trong danh sách đến khi điều kiện sai(khi node sau là cuối và data của node sau > value của newNode)
     }
-
+    
     new_node->next = current->next; // tạo liên kết cho newnode tới node tiếp theo của node mà con trỏ current đang trỏ tới
     current->next = new_node; // cho con trỏ của current trỏ tới newnode
 }
@@ -43,7 +43,8 @@ CenterPoint *buildTree(Node *head, int start, int end) {
     if (head == NULL || start > end) {
         return NULL;
     }
-
+    
+    // vong lap duyet tu node dau den node mid (tu gia tri 0 den 4999)
     int mid = (start + end) / 2;
     Node *node = head;
     for (int i = start; i < mid; i++) {
@@ -52,7 +53,8 @@ CenterPoint *buildTree(Node *head, int start, int end) {
         }
         node = node->next;
     }
-
+    
+    // tao con tro root tro vao node mid
     CenterPoint *root = (CenterPoint *) malloc(sizeof(CenterPoint));
     root->value = node->data;
     root->left = buildTree(head, start, mid - 1);
@@ -61,7 +63,7 @@ CenterPoint *buildTree(Node *head, int start, int end) {
     return root;
 }
 
-//tim diem giua
+//tim diem giua va tao cay
 CenterPoint *centerPoint(Node *head) {
     int length = 0;
     Node *node = head;
@@ -111,13 +113,17 @@ int main() {
         add_node(&head, value);
     }
 
-    add_node(&head, 5639);
+//them node co gia tri 7050
+    add_node(&head, 7050);
 
+// in ra danh sach gom cac node
     print_list(head);
 
+// tao mot con tro tro vao node giua
     CenterPoint *ptr = centerPoint(head);
 
-    int value = 5639;
+    int value = 7050;
+
     CenterPoint *result = binarySearch(ptr, value);
     if (result != NULL) {
         printf("Tim thay %d\n", result->value);
