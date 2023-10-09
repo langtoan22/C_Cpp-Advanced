@@ -21,11 +21,12 @@ int main(int argc, char const *argv[])
 {
     double kq;
 
-    TRY {
+    TRY { // check_value = setjmp(buf)) == 0{
         kq = thuong (12, 0);
         printf("kq: %f\n", kq);
     }
-    CATCH(1){
+
+    CATCH(1){ // else if (check_value = 1){
         printf("ERROR, mau bang 0");
     }
     

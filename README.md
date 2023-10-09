@@ -476,6 +476,82 @@ Các member trong Union đều dùng chung một địa chỉ nên khi thay đ�
 - Sử dụng thư viện setjmp.h để dùng setjum
 - sử dụng setjmp với TRY CATCH THROW để khi chương trình có lỗi thì mọi sẽ dừng lại đê ưu tiên xử lý lỗi trước và trỏ con trỏ đến vùng lỗi để xử lý (rất phức tạp khi không dùng setjmp ở các vòng lặp)
 
+vidu: 
+
+#include <stdio.h>
+
+#include <stdlib.h>
+
+#include <setjmp.h>
+
+int main(int argc, char const *argv[])
+{
+    // khởi tạo biến jmp_buf
+    jmp_buf jumb;
+    int i = setjmp(jumb); //  có giá trị = 0
+
+    printf("i: %d\n",i); // in ra gia tri 0
+
+    if (i!= 0) // khong co gia tri nao khac 0 nên khong chay qua ham if
+    {
+        exit(0); 
+    }
+
+    longjmp(jumb, 1);// khoi tao gán giá trị = 1
+
+    printf("test\n"); // in ra = 1, sau do se quay lai setjmp va tra lai gia tri i= 1 khi do den exit se dung
+
+
+    return 0;
+}
+
+khi nào chương trình gặp longjmp() thì con trỏ sẽ quay ngược lại vị trí của setjmp()
+
+
+### 3.1 TRY CATH THROW (7_4)
+
+#include <stdio.h>
+
+#include <stdlib.h>
+
+#include <setjmp.h>
+
+    jmp_buf buf;
+    int check_value = 0;
+
+    #define TRY if((check_value = setjmp(buf)) == 0)
+
+    #define CATCH(num) else if (check_value = num)
+
+    #define THROW(num) longjmp(buf, num)
+
+    double thuong (int a, int b){
+        if(b == 0){
+            THROW(1);
+        }
+        return (double)a/b;
+    }
+int main(int argc, char const *argv[])
+{
+
+    double kq;
+
+    TRY {
+        kq = thuong (12, 0);
+        printf("kq: %f\n", kq);
+    }
+    CATCH(1){
+        printf("ERROR, mau bang 0");
+    }
+    
+    return 0;
+}
+
+- trong chương trình trên TRY CATH THROW thực chất là cách viết các điều kiện lỗi if else bình thường: TRY là chương trình chính, CATH để in ra lỗi từng trường hợp, THROW là longjmp là để viết điều kiện lỗi
+- 
+ - Khi dùng TRY CATH THROW thì khi chương trình bị lỗi sẽ được ưu tiên gỡ lỗi trước, khi có lỗi thì sẽ vào CATH để in ra từng lỗi 
+
+ - ứng dụng khi chương trình có nhiều điều kiện ngoài lề như if else, vòng lặp ..., thì viết theo kiểu TRY CATH sẽ được ưu tiên xử lý trước khi gặp lỗi 
 # BÀI 8: POINTER
 
 ## 1. con trỏ
